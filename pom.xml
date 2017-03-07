@@ -95,6 +95,18 @@
         <artifactId>binarycache-modules-optionals-microservice</artifactId>
         <version>${project.version}</version>
       </dependency>
+      <dependency>
+        <groupId>org.rapidpm.microservice</groupId>
+        <artifactId>binarycache-modules-client</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.rapidpm.microservice</groupId>
+        <artifactId>binarycache-modules-client-api</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+
+
     </dependencies>
   </dependencyManagement>
 
