@@ -139,7 +139,7 @@
               </transformers>
               <minimizeJar>false</minimizeJar>
               <promoteTransitiveDependencies>true</promoteTransitiveDependencies>
-              <createSourcesJar>true</createSourcesJar>
+              <createSourcesJar>false</createSourcesJar>
               <shadeSourcesContent>true</shadeSourcesContent>
               <filters>
                 <filter>

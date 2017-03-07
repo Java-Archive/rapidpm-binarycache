@@ -23,8 +23,6 @@ import com.vaadin.annotations.VaadinServletConfiguration;
 import org.rapidpm.jumpstart.microservice.optionals.vaadin.DDIVaadinServlet;
 
 import javax.servlet.annotation.WebServlet;
-import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 
 import static java.util.Collections.singletonList;
