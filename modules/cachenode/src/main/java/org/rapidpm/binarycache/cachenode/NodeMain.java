@@ -19,6 +19,9 @@ import org.rapidpm.ddi.DI;
  */
 public class NodeMain {
 
+  private NodeMain() {
+  }
+
   public static void main(String[] args) {
     DI.activatePackages("org.rapidpm");
     final CacheService cacheService = DI.activateDI(CacheService.class);

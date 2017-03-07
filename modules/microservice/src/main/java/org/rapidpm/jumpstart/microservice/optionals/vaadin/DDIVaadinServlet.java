@@ -47,7 +47,7 @@ public abstract class DDIVaadinServlet extends VaadinServlet {
   /**
    * return a list of pkg names that are available for Injection
    *
-   * @return
+   * @return return
    */
   public abstract List<String> topLevelPackagesToActivate();
 

@@ -82,7 +82,7 @@ public class LoginScreenImpl extends LoginScreen {
 
     b_login.setCaption(propertyService.resolve("login.name"));
     b_login.setClickShortcut(KeyCode.ENTER);
-    b_login.setDescription (propertyService.resolve("login.info"));
+    b_login.setDescription(propertyService.resolve("login.info"));
     b_login.addClickListener(clickEvent -> {
       final String username = tf_username.getValue();
       final String password = pf_password.getValue();
