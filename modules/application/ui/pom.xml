@@ -140,6 +140,8 @@
               <minimizeJar>false</minimizeJar>
               <promoteTransitiveDependencies>true</promoteTransitiveDependencies>
               <createSourcesJar>false</createSourcesJar>
+              <shadeSourcesContent>true</shadeSourcesContent>
+              <createSourcesJar>false</createSourcesJar>
               <shadeSourcesContent>false</shadeSourcesContent>
               <filters>
                 <filter>
