@@ -16,11 +16,11 @@ package org.rapidpm.binarycache.client.connect.rest;
  */
 public class BinaryCacheRestClient {
 
-  @Inject BinaryCacheClient binaryCacheClient;
 
+  //@Inject BinaryCacheClient binaryCacheClient;
 
-
-  //create REST methods , delegate to binaryCacheClient
+  // implement binaryCacheClient, delegate requests to http requests
+  // the store has a rest endpoint that implements the same methods and he will answer
 
 
 

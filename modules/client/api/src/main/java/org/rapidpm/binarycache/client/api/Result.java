@@ -11,10 +11,9 @@ package org.rapidpm.binarycache.client.api;
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- *
+ * <p>
  * Created by Sven Ruppert - RapidPM - Team on 07.03.17.
  */
 public enum Result {
-
-  OK;
+  OK
 }
