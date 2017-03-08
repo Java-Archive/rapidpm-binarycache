@@ -3,6 +3,8 @@ package org.rapidpm.binarycache.api;
 import javax.cache.Cache;
 import javax.cache.CacheManager;
 import javax.cache.Caching;
+import javax.cache.configuration.Configuration;
+import javax.cache.configuration.MutableConfiguration;
 import javax.cache.spi.CachingProvider;
 import java.util.Optional;
 
@@ -27,6 +29,18 @@ public interface BinaryCacheClient {
     final CachingProvider cachingProvider = Caching.getCachingProvider();
     final CacheManager cacheManager = cachingProvider.getCacheManager();
     return cacheManager.getCache(cacheName, CacheKey.class, Byte[].class);
+  }
+
+  default Cache<CacheKey, Byte[]> createCache(String cacheName) {
+    final CachingProvider cachingProvider = Caching.getCachingProvider();
+    final CacheManager cacheManager = cachingProvider.getCacheManager();
+    return cacheManager.createCache(cacheName, new MutableConfiguration<>());
+  }
+
+  default Cache<CacheKey, Byte[]> createCache(String cacheName, Configuration<CacheKey, Byte[]> configuration) {
+    final CachingProvider cachingProvider = Caching.getCachingProvider();
+    final CacheManager cacheManager = cachingProvider.getCacheManager();
+    return cacheManager.createCache(cacheName, configuration);
   }
 
   default Result cacheBinary(String cacheName, CacheKey cacheKey, Byte[] binary) {
@@ -54,5 +68,8 @@ public interface BinaryCacheClient {
     final boolean remove = getCache(cacheName).remove(cacheKey);
     return Result.OK;
   }
+
+
+
 
 }
