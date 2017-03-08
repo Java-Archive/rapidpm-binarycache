@@ -1,5 +1,12 @@
 package org.rapidpm.binarycache.client.connect.rest;
 
+import org.rapidpm.binarycache.client.api.BinaryCacheClient;
+import org.rapidpm.binarycache.client.api.CacheKey;
+import org.rapidpm.binarycache.client.api.Result;
+
+import javax.cache.Cache;
+import java.util.Optional;
+
 /**
  * Copyright (C) 2017 RapidPM - Sven Ruppert
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -14,15 +21,42 @@ package org.rapidpm.binarycache.client.connect.rest;
  *
  * Created by Sven Ruppert - RapidPM - Team on 07.03.17.
  */
-public class BinaryCacheRestClient {
-
+public class BinaryCacheRestClient implements BinaryCacheClient {
 
   //@Inject BinaryCacheClient binaryCacheClient;
 
-  // implement binaryCacheClient, delegate requests to http requests
-  // the store has a rest endpoint that implements the same methods and he will answer
 
 
+  //create REST request methods , delegate to binaryCacheClient
 
 
+  @Override
+  public Cache<CacheKey, Byte[]> getCache(final String cacheName) {
+    return null; // REST call
+  }
+
+  @Override
+  public Result cacheBinary(final String cacheName, final CacheKey cacheKey, final Byte[] binary) {
+    return null;
+  }
+
+  @Override
+  public Result cacheBinaryIfAbsent(final String cacheName, final CacheKey cacheKey, final Byte[] binary) {
+    return null;
+  }
+
+  @Override
+  public Optional<Byte[]> getCachedElement(final String cacheName, final CacheKey cacheKey) {
+    return null;
+  }
+
+  @Override
+  public Result clearCache(final String cacheName) {
+    return null;
+  }
+
+  @Override
+  public Result removeEntry(final String cacheName, final CacheKey cacheKey) {
+    return null;
+  }
 }
