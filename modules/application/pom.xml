@@ -38,4 +38,11 @@
   </modules>
 
 
+  <dependencies>
+    <dependency>
+      <groupId>org.rapidpm.dynamic-cdi</groupId>
+      <artifactId>rapidpm-dynamic-cdi</artifactId>
+    </dependency>
+  </dependencies>
+
 </project>
