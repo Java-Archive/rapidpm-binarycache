@@ -17,7 +17,7 @@ import java.util.Optional;
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- *
+ * <p>
  * Created by Sven Ruppert - RapidPM - Team on 07.03.17.
  */
 public interface BinaryCacheClient {
@@ -31,7 +31,7 @@ public interface BinaryCacheClient {
 
   default Result cacheBinary(String cacheName, CacheKey cacheKey, Byte[] binary) {
     final Cache<CacheKey, Byte[]> cache = getCache(cacheName);
-    cache.put(cacheKey,binary);
+    cache.put(cacheKey, binary);
     return Result.OK;
   }
 
