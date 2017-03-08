@@ -1,4 +1,4 @@
-package org.rapidpm.binarycache.client.api;
+package org.rapidpm.binarycache.api;
 
 import java.io.Serializable;
 

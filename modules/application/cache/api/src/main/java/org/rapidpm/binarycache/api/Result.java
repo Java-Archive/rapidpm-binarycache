@@ -1,4 +1,4 @@
-package org.rapidpm.binarycache.client.api;
+package org.rapidpm.binarycache.api;
 
 /**
  * Copyright (C) 2017 RapidPM - Sven Ruppert

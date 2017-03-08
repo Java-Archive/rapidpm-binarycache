@@ -1,4 +1,4 @@
-package org.rapidpm.binarycache.client.api;
+package org.rapidpm.binarycache.api;
 
 import javax.cache.Cache;
 import javax.cache.CacheManager;

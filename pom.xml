@@ -80,6 +80,14 @@
   </licenses>
   <dependencyManagement>
     <dependencies>
+
+      <!-- https://mvnrepository.com/artifact/javax.cache/cache-api -->
+      <dependency>
+        <groupId>javax.cache</groupId>
+        <artifactId>cache-api</artifactId>
+        <version>1.0.0</version>
+      </dependency>
+
       <dependency>
         <groupId>org.rapidpm.microservice</groupId>
         <artifactId>binarycache-modules-application-logic</artifactId>
@@ -97,12 +105,7 @@
       </dependency>
       <dependency>
         <groupId>org.rapidpm.microservice</groupId>
-        <artifactId>binarycache-modules-client</artifactId>
-        <version>${project.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>org.rapidpm.microservice</groupId>
-        <artifactId>binarycache-modules-client-api</artifactId>
+        <artifactId>binarycache-modules-application-cache-api</artifactId>
         <version>${project.version}</version>
       </dependency>
 

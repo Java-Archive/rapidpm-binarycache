@@ -17,4 +17,11 @@
   </modules>
 
 
+  <dependencies>
+    <dependency>
+      <groupId>org.rapidpm.microservice</groupId>
+      <artifactId>binarycache-modules-application-cache-api</artifactId>
+    </dependency>
+  </dependencies>
+
 </project>

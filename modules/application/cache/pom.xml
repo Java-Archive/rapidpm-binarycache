@@ -14,6 +14,7 @@
   <modules>
     <module>connect</module>
     <module>provider</module>
+    <module>api</module>
   </modules>
 
 
