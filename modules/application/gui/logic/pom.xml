@@ -22,38 +22,39 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <parent>
-    <artifactId>binarycache-modules-application</artifactId>
+    <artifactId>binarycache-modules-app</artifactId>
     <groupId>org.rapidpm.microservice</groupId>
     <version>1.0.0-SNAPSHOT</version>
   </parent>
   <modelVersion>4.0.0</modelVersion>
 
-  <artifactId>binarycache-modules-application-design</artifactId>
+  <artifactId>binarycache-modules-app-gui-logic</artifactId>
 
   <dependencies>
+
+
+    <dependency>
+      <groupId>org.rapidpm.dynamic-cdi</groupId>
+      <artifactId>rapidpm-dynamic-cdi</artifactId>
+
+    </dependency>
+    <!--using Annotation Processing-->
+    <dependency>
+      <groupId>org.rapidpm.proxybuilder</groupId>
+      <artifactId>rapidpm-proxybuilder-modules-objectadapter-generator-processors</artifactId>
+
+    </dependency>
+    <dependency>
+      <groupId>org.rapidpm.proxybuilder</groupId>
+      <artifactId>rapidpm-proxybuilder-modules-objectadapter-generator-annotations</artifactId>
+      <!--<optional>true</optional>-->
+    </dependency>
+    <!--using Annotation Processing-->
+
     <dependency>
       <groupId>com.vaadin</groupId>
       <artifactId>vaadin-server</artifactId>
     </dependency>
+
   </dependencies>
-
-  <build>
-  <plugins>
-    <plugin>
-      <artifactId>maven-checkstyle-plugin</artifactId>
-      <configuration>
-        <skip>true</skip>
-      </configuration>
-    </plugin>
-      <!-- no code to test here -->
-    <plugin>
-      <groupId>org.pitest</groupId>
-      <artifactId>pitest-maven</artifactId>
-      <configuration>
-        <skip>true</skip>
-      </configuration>
-    </plugin>
-  </plugins>
-</build>
-
 </project>

@@ -4,7 +4,6 @@ import org.rapidpm.binarycache.api.BinaryCacheClient;
 import org.rapidpm.binarycache.api.CacheKey;
 import org.rapidpm.binarycache.api.Result;
 
-import javax.cache.Cache;
 import javax.inject.Inject;
 import java.util.Optional;
 
@@ -24,7 +23,7 @@ import java.util.Optional;
  */
 public class BinaryCacheRestClient {
 
-  private @Inject BinaryCacheClient binaryCacheClient;
+  @Inject private BinaryCacheClient binaryCacheClient;
 
 
   public Result cacheBinary(final String cacheName, final CacheKey cacheKey, final Byte[] binary) {

@@ -90,12 +90,12 @@
 
       <dependency>
         <groupId>org.rapidpm.microservice</groupId>
-        <artifactId>binarycache-modules-application-logic</artifactId>
+        <artifactId>binarycache-modules-app-gui-logic</artifactId>
         <version>${project.version}</version>
       </dependency>
       <dependency>
         <groupId>org.rapidpm.microservice</groupId>
-        <artifactId>binarycache-modules-application-design</artifactId>
+        <artifactId>binarycache-modules-app-gui-design</artifactId>
         <version>${project.version}</version>
       </dependency>
       <dependency>
@@ -105,7 +105,7 @@
       </dependency>
       <dependency>
         <groupId>org.rapidpm.microservice</groupId>
-        <artifactId>binarycache-modules-application-cache-api</artifactId>
+        <artifactId>binarycache-modules-app-cache-api</artifactId>
         <version>${project.version}</version>
       </dependency>
 

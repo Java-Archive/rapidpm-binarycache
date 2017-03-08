@@ -33,8 +33,6 @@
   <modules>
     <module>microservice</module>
     <module>application</module>
-    <!--<module>cachenode</module>-->
-    <module>store</module>
     <module>client</module>
   </modules>
 

@@ -1,8 +1,8 @@
 package org.rapidpm.binarycache.client.connect.rest;
 
-import org.rapidpm.binarycache.client.api.BinaryCacheClient;
-import org.rapidpm.binarycache.client.api.CacheKey;
-import org.rapidpm.binarycache.client.api.Result;
+import org.rapidpm.binarycache.api.BinaryCacheClient;
+import org.rapidpm.binarycache.api.CacheKey;
+import org.rapidpm.binarycache.api.Result;
 
 import javax.cache.Cache;
 import javax.ws.rs.client.Client;
@@ -25,11 +25,7 @@ import java.util.Optional;
  */
 public class BinaryCacheRestClient implements BinaryCacheClient {
 
-  //@Inject BinaryCacheClient binaryCacheClient;
-
-
   //create REST request methods , delegate to binaryCacheClient
-
 
   @Override
   public Cache<CacheKey, Byte[]> getCache(final String cacheName) {
