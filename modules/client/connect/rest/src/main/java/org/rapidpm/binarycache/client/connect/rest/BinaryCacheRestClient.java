@@ -3,7 +3,6 @@ package org.rapidpm.binarycache.client.connect.rest;
 import org.rapidpm.binarycache.client.api.BinaryCacheClient;
 import org.rapidpm.binarycache.client.api.CacheKey;
 import org.rapidpm.binarycache.client.api.Result;
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import javax.cache.Cache;
 import javax.ws.rs.client.Client;
@@ -34,7 +33,7 @@ public class BinaryCacheRestClient implements BinaryCacheClient {
 
   @Override
   public Cache<CacheKey, Byte[]> getCache(final String cacheName) {
-    throw new NotImplementedException();
+    throw new RuntimeException("not allowed remote");
   }
 
   @Override
