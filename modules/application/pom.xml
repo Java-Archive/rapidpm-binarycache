@@ -34,6 +34,7 @@
     <module>logic</module>
     <module>ui</module>
     <module>design</module>
+    <module>cache</module>
   </modules>
 
 

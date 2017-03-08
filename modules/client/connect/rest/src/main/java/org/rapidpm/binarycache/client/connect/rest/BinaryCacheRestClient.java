@@ -3,8 +3,11 @@ package org.rapidpm.binarycache.client.connect.rest;
 import org.rapidpm.binarycache.client.api.BinaryCacheClient;
 import org.rapidpm.binarycache.client.api.CacheKey;
 import org.rapidpm.binarycache.client.api.Result;
+import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import javax.cache.Cache;
+import javax.ws.rs.client.Client;
+import javax.ws.rs.client.ClientBuilder;
 import java.util.Optional;
 
 /**
@@ -26,13 +29,12 @@ public class BinaryCacheRestClient implements BinaryCacheClient {
   //@Inject BinaryCacheClient binaryCacheClient;
 
 
-
   //create REST request methods , delegate to binaryCacheClient
 
 
   @Override
   public Cache<CacheKey, Byte[]> getCache(final String cacheName) {
-    return null; // REST call
+    throw new NotImplementedException();
   }
 
   @Override
@@ -52,11 +54,22 @@ public class BinaryCacheRestClient implements BinaryCacheClient {
 
   @Override
   public Result clearCache(final String cacheName) {
-    return null;
+    Client client = ClientBuilder.newClient();
+    final String generateBasicReqURL = "http://" + "127.0.0.1" + ":" + "8090" + "/" + "rest" + "/" + "REST-APP" + "/" + "params";
+    String val = client
+        .target(generateBasicReqURL)
+        .request()
+        .get(String.class);
+    client.close();
+
+    //may check something...
+    return Result.OK;
   }
 
   @Override
   public Result removeEntry(final String cacheName, final CacheKey cacheKey) {
     return null;
   }
+
+
 }
