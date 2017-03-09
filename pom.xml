@@ -140,4 +140,20 @@
 
     </plugins>
   </build>
+
+  <profiles>
+    <!-- make this work -->
+    <profile>
+      <id>binarycache-rest-jcs</id>
+      <activation>
+        <activeByDefault>false</activeByDefault>
+      </activation>
+      <modules>
+        <module>modules/app/cache/api</module>
+        <module>modules/app/cache/connect/rest</module>
+        <module>modules/app/cache/provider/jcache</module>
+      </modules>
+    </profile>
+  </profiles>
+
 </project>

@@ -1,4 +1,4 @@
-package org.rapidpm.binarycache.provider.jcache;
+package org.rapidpm.binarycache.provider.ehcache;
 
 import org.rapidpm.binarycache.api.BinaryCacheClient;
 
@@ -16,11 +16,6 @@ import org.rapidpm.binarycache.api.BinaryCacheClient;
  * <p>
  * Created by RapidPM - Team on 09.03.2017.
  */
-public class BinaryCacheImpl implements BinaryCacheClient {
+public class EhCacheImpl implements BinaryCacheClient {
 
-
-  public BinaryCacheImpl() {
-
-
-  }
 }

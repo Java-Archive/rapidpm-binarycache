@@ -15,5 +15,5 @@ package org.rapidpm.binarycache.api;
  * Created by Sven Ruppert - RapidPM - Team on 07.03.17.
  */
 public enum Result {
-  OK
+  FAILED, OK
 }

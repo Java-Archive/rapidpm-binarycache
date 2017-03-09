@@ -5,6 +5,9 @@ import org.rapidpm.binarycache.api.CacheKey;
 import org.rapidpm.binarycache.api.Result;
 
 import javax.inject.Inject;
+import javax.ws.rs.POST;
+import javax.ws.rs.Path;
+import javax.ws.rs.core.Response;
 import java.util.Optional;
 
 /**
@@ -21,13 +24,16 @@ import java.util.Optional;
  *
  * Created by Sven Ruppert - RapidPM - Team on 08.03.17.
  */
+@Path("/binarycache")
 public class BinaryCacheRestClient {
 
   @Inject private BinaryCacheClient binaryCacheClient;
 
+  @POST
+  @Path("/put")
+  public Response cacheBinary(final String cacheName, final CacheKey cacheKey, final Byte[] binary) {
 
-  public Result cacheBinary(final String cacheName, final CacheKey cacheKey, final Byte[] binary) {
-    return binaryCacheClient.cacheBinary(cacheName, cacheKey, binary);
+    return null;
   }
 
   public Result cacheBinaryIfAbsent(final String cacheName, final CacheKey cacheKey, final Byte[] binary) {

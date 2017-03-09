@@ -36,7 +36,6 @@
     <module>gui</module>
   </modules>
 
-
   <dependencies>
     <dependency>
       <groupId>org.rapidpm.dynamic-cdi</groupId>

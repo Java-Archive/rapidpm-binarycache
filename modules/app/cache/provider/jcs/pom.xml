@@ -3,22 +3,19 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <parent>
-    <artifactId>binarycache-modules-client-connect</artifactId>
+    <artifactId>binarycache-modules-app-cache-provider</artifactId>
     <groupId>org.rapidpm.microservice</groupId>
     <version>1.0.0-SNAPSHOT</version>
   </parent>
   <modelVersion>4.0.0</modelVersion>
 
-  <artifactId>binarycache-modules-client-connect-inmemory</artifactId>
+  <artifactId>binarycache-modules-app-cache-provider-jcs</artifactId>
 
   <dependencies>
-    <!-- temporary! provider is choosen by maven profile -->
     <dependency>
-      <groupId>org.rapidpm.microservice</groupId>
-      <artifactId>binarycache-modules-app-cache-provider-ehcache</artifactId>
-      <version>1.0.0-SNAPSHOT</version>
+      <groupId>org.apache.commons</groupId>
+      <artifactId>commons-jcs-core</artifactId>
+      <version>2.1</version>
     </dependency>
   </dependencies>
-
-
 </project>

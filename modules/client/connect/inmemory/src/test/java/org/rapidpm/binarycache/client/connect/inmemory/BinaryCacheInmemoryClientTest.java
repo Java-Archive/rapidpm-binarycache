@@ -1,6 +1,14 @@
 package org.rapidpm.binarycache.client.connect.inmemory;
 
+import org.junit.Assert;
+import org.junit.Before;
+import org.junit.Test;
 import org.rapidpm.binarycache.api.BinaryCacheClient;
+import org.rapidpm.binarycache.api.CacheKey;
+import org.rapidpm.ddi.DI;
+
+import javax.cache.Cache;
+import javax.inject.Inject;
 
 /**
  * Copyright (C) 2010 RapidPM
@@ -16,6 +24,20 @@ import org.rapidpm.binarycache.api.BinaryCacheClient;
  * <p>
  * Created by RapidPM - Team on 09.03.2017.
  */
-public class BinaryCacheInmemoryClient implements BinaryCacheClient {
+public class BinaryCacheInmemoryClientTest {
 
+  @Inject
+  BinaryCacheClient client;
+
+  @Before
+  public void setUp() throws Exception {
+    DI.activatePackages("org.rapidpm");
+    DI.activateDI(this);
+  }
+
+  @Test
+  public void test001() throws Exception {
+    final Cache<CacheKey, Byte[]> test = client.createCache("test");
+    Assert.assertNotNull(test);
+  }
 }

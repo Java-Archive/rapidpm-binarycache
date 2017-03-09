@@ -12,12 +12,10 @@
   <artifactId>binarycache-modules-client-connect-rest</artifactId>
 
   <dependencies>
-
     <dependency>
       <groupId>org.jboss.resteasy</groupId>
       <artifactId>resteasy-jaxrs</artifactId>
     </dependency>
-
   </dependencies>
 
 </project>

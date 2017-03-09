@@ -34,7 +34,9 @@ public interface BinaryCacheClient {
   default Cache<CacheKey, Byte[]> createCache(String cacheName) {
     final CachingProvider cachingProvider = Caching.getCachingProvider();
     final CacheManager cacheManager = cachingProvider.getCacheManager();
-    return cacheManager.createCache(cacheName, new MutableConfiguration<>());
+    final MutableConfiguration<CacheKey, Byte[]> mutableConfiguration = new MutableConfiguration<CacheKey, Byte[]>()
+        .setTypes(CacheKey.class, Byte[].class);
+    return cacheManager.createCache(cacheName, mutableConfiguration);
   }
 
   default Cache<CacheKey, Byte[]> createCache(String cacheName, Configuration<CacheKey, Byte[]> configuration) {
