@@ -22,20 +22,26 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <parent>
-    <artifactId>binarycache</artifactId>
+    <artifactId>binarycache-modules</artifactId>
     <groupId>org.rapidpm.microservice</groupId>
     <version>1.0.0-SNAPSHOT</version>
   </parent>
   <modelVersion>4.0.0</modelVersion>
 
-  <artifactId>binarycache-modules</artifactId>
+  <artifactId>binarycache-modules-app</artifactId>
   <packaging>pom</packaging>
 
   <modules>
-    <module>microservice</module>
-    <module>client</module>
-    <module>app</module>
+    <module>cache</module>
+    <module>gui</module>
   </modules>
 
+
+  <dependencies>
+    <dependency>
+      <groupId>org.rapidpm.dynamic-cdi</groupId>
+      <artifactId>rapidpm-dynamic-cdi</artifactId>
+    </dependency>
+  </dependencies>
 
 </project>
