@@ -6,6 +6,7 @@ import org.apache.commons.codec.binary.Base64InputStream;
 import org.apache.commons.io.IOUtils;
 import org.rapidpm.binarycache.api.BinaryCacheClient;
 import org.rapidpm.binarycache.api.CacheKey;
+import org.rapidpm.binarycache.api.CacheKeyAdapter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -42,7 +43,7 @@ public class BinaryCacheRestClient {
   @Inject
   private BinaryCacheClient binaryCacheClient;
   @Inject
-  private
+  private CacheKeyAdapter adapter;
 
   @PUT
   @Path("/{cacheName}/{key}")
@@ -53,7 +54,7 @@ public class BinaryCacheRestClient {
 
     final CacheKey cacheKey = decodeCacheKey(key);
 
-    try (final Base64InputStream bis = new Base64InputStream(inputStream)){
+    try (final Base64InputStream bis = new Base64InputStream(inputStream)) {
       final byte[] bytes = IOUtils.toByteArray(bis);
       binaryCacheClient.cacheBinary(cacheName, cacheKey, fromPrimitive(bytes));
       bis.close();
@@ -111,10 +112,10 @@ public class BinaryCacheRestClient {
 
   private CacheKey decodeCacheKey(String key) {
     final byte[] decode = Base64.getUrlDecoder().decode(key);
-    GsonBuilder builder = new GsonBuilder();
-    builder.registerTypeAdapter(CacheKey.class, new CacheKeyRequestCreator());
-    Gson parser = builder.create();
 
+    final Gson gson = new GsonBuilder()
+        .registerTypeAdapter(CacheKey.class, adapter)
+        .create();
 
     return gson.fromJson(new String(decode), CacheKey.class);
   }

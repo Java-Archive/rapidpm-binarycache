@@ -1,19 +1,27 @@
 package junit.org.rapidpm.binarycache.connect.rest;
 
 import com.google.gson.Gson;
-import org.junit.*;
+import com.google.gson.GsonBuilder;
+import org.junit.After;
+import org.junit.Before;
+import org.junit.BeforeClass;
+import org.junit.Test;
+import org.rapidpm.binarycache.api.BinaryCacheClient;
 import org.rapidpm.binarycache.api.CacheKey;
+import org.rapidpm.binarycache.api.CacheKeyAdapter;
+import org.rapidpm.binarycache.api.defaultkey.DefaultCacheKey;
 import org.rapidpm.ddi.DI;
 import org.rapidpm.dependencies.core.net.PortUtils;
 import org.rapidpm.microservice.Main;
 import org.rapidpm.microservice.MainUndertow;
-import org.rapidpm.microservice.test.RestUtils;
 
+import javax.inject.Inject;
 import javax.ws.rs.client.ClientBuilder;
 import javax.ws.rs.client.Entity;
 import javax.ws.rs.core.MediaType;
 import java.util.Base64;
-import java.util.UUID;
+
+import static org.junit.Assert.assertEquals;
 
 /**
  * Copyright (C) 2010 RapidPM
@@ -31,15 +39,22 @@ import java.util.UUID;
  */
 public class BinaryCacheRestClientTest {
 
+  @Inject
+  private BinaryCacheClient binaryCacheClient;
+
+  @Inject
+  private CacheKeyAdapter adapter;
   private static String url;
-  private final RestUtils restUtils = new RestUtils();
 
   @BeforeClass
   public static void setUpClass() {
     System.setProperty(MainUndertow.REST_PORT_PROPERTY, new PortUtils().nextFreePortForTest() + "");
     System.setProperty(MainUndertow.SERVLET_PORT_PROPERTY, new PortUtils().nextFreePortForTest() + "");
-    url = "http://127.0.0.1:" + System.getProperty(MainUndertow.SERVLET_PORT_PROPERTY) + MainUndertow.CONTEXT_PATH_REST; //from Annotation Servlet
-    System.out.println("url = " + url);
+    url = String.format("http://%s:%s/%s/%s",
+        "127.0.0.1",
+        System.getProperty(MainUndertow.REST_PORT_PROPERTY),
+        MainUndertow.CONTEXT_PATH_REST,
+        "cache");
   }
 
   @Before
@@ -47,7 +62,9 @@ public class BinaryCacheRestClientTest {
     DI.clearReflectionModel();
     DI.activatePackages("org.rapidpm");
     DI.activateDI(this);
+    binaryCacheClient.createCache("testcache");
     Main.deploy();
+
   }
 
   @After
@@ -60,15 +77,11 @@ public class BinaryCacheRestClientTest {
   public void test001() throws Exception {
     final String testString = "my test string";
 
-    final SimpleCacheKey cacheKey = new SimpleCacheKey();
-    final String json = new Gson().toJson(cacheKey);
-    final byte[] encodedKey = Base64.getUrlEncoder().encode(json.getBytes());
+    final CacheKey cacheKey = new DefaultCacheKey(testString);
+    final byte[] encodedKey = encodeKey(cacheKey);
 
-    final String testUrl = String.format("http://%s:%s/%s/%s/%s/%s",
-        "127.0.0.1",
-        System.getProperty(MainUndertow.REST_PORT_PROPERTY),
-        MainUndertow.CONTEXT_PATH_REST,
-        "cache",
+    final String testUrl = String.format("%s/%s/%s",
+        url,
         "testcache",
         new String(encodedKey));
 
@@ -79,19 +92,16 @@ public class BinaryCacheRestClientTest {
         .request(MediaType.APPLICATION_OCTET_STREAM)
         .put(Entity.entity(testString.getBytes(), MediaType.APPLICATION_OCTET_STREAM));
 
-    Assert.assertEquals(200, response.getStatus());
+    assertEquals(200, response.getStatus());
+  }
+
+  private byte[] encodeKey(CacheKey cacheKey) {
+    final Gson gson = new GsonBuilder()
+        .registerTypeAdapter(CacheKey.class, adapter)
+        .create();
+    final String jsonString = gson.toJson(cacheKey, CacheKey.class);
+    return Base64.getUrlEncoder().encode(jsonString.getBytes());
   }
 }
 
-class SimpleCacheKey implements CacheKey {
-  private String key;
 
-  public SimpleCacheKey() {
-    this.key = UUID.randomUUID().toString();
-  }
-
-  @Override
-  public String keyAsString() {
-    return key;
-  }
-}

@@ -2,12 +2,11 @@ package junit.org.rapidpm.binarycache.api.defaultkey.v002;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.google.gson.JsonDeserializer;
-import com.google.gson.JsonSerializer;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.rapidpm.binarycache.api.CacheKey;
+import org.rapidpm.binarycache.api.CacheKeyAdapter;
 import org.rapidpm.binarycache.api.defaultkey.DefaultCacheKey;
 import org.rapidpm.ddi.DI;
 
@@ -33,9 +32,7 @@ import static org.junit.Assert.assertNotNull;
 public class DefaultCacheKeyAdapterTest002 {
 
   @Inject
-  JsonDeserializer deserializer;
-  @Inject
-  JsonSerializer serializer;
+  private CacheKeyAdapter adapter;
 
   @Before
   public void setUp() throws Exception {
@@ -56,14 +53,14 @@ public class DefaultCacheKeyAdapterTest002 {
     final String doctype = "thumbnail";
     final int pageNumber = 1;
     final Gson gson = new GsonBuilder()
-        .registerTypeAdapter(CacheKey.class, serializer)
-        .registerTypeAdapter(CacheKey.class, deserializer)
+        .registerTypeAdapter(CacheKey.class, adapter)
         .create();
 
     CacheKey defaultKey = new DefaultCacheKey(id);
     final String jsonDefaultKey = gson.toJson(defaultKey, CacheKey.class);
     defaultKey = gson.fromJson(jsonDefaultKey, CacheKey.class);
 
+    assertEquals("{\"CLASS\":\"org.rapidpm.binarycache.api.defaultkey.DefaultCacheKey\",\"CONTENT\":{\"key\":\"a1b2c3\"}}", jsonDefaultKey);
     assertNotNull(defaultKey);
     assertEquals(id, defaultKey.keyAsString());
 
@@ -71,6 +68,7 @@ public class DefaultCacheKeyAdapterTest002 {
     final String jsonExtendedKey = gson.toJson(extendedKey, CacheKey.class);
     extendedKey = gson.fromJson(jsonExtendedKey, CacheKey.class);
 
+    assertEquals("{\"CLASS\":\"junit.org.rapidpm.binarycache.api.defaultkey.v002.ExtendedCacheKey\",\"CONTENT\":{\"id\":\"a1b2c3\",\"doctype\":\"thumbnail\",\"pageNumber\":1}}", jsonExtendedKey);
     assertNotNull(extendedKey);
     assertEquals(String.format("%s_%s_%d", doctype, id, pageNumber), extendedKey.keyAsString());
   }

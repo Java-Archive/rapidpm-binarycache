@@ -31,9 +31,9 @@ import javax.inject.Inject;
 public class DefaultCacheKeyAdapterTest001 {
 
   @Inject
-  JsonDeserializer<CacheKey> deserializer;
+  JsonDeserializer deserializer;
   @Inject
-  JsonSerializer<CacheKey> serializer;
+  JsonSerializer serializer;
 
   @Before
   public void setUp() throws Exception {
@@ -56,7 +56,7 @@ public class DefaultCacheKeyAdapterTest001 {
         .registerTypeAdapter(CacheKey.class, deserializer)
         .create();
 
-    final String json = gson.toJson(defaultCacheKey);
+    final String json = gson.toJson(defaultCacheKey, CacheKey.class); // always tell gson what class it has to convert
 
     final CacheKey cacheKey = gson.fromJson(json, CacheKey.class);
     Assert.assertNotNull(cacheKey);
