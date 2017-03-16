@@ -12,11 +12,12 @@
   <artifactId>binarycache-modules-client-connect-inmemory</artifactId>
 
   <dependencies>
-    <!-- temporary! provider is choosen by maven profile -->
+    <!-- temporary! provider is chosen by maven profile -->
     <dependency>
       <groupId>org.rapidpm.microservice</groupId>
       <artifactId>binarycache-modules-app-cache-provider-ehcache</artifactId>
       <version>1.0.0-SNAPSHOT</version>
+      <scope>test</scope>
     </dependency>
   </dependencies>
 
