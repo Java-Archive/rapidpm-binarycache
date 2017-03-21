@@ -1,6 +1,14 @@
 package org.rapidpm.binarycache.provider.ehcache;
 
 import org.rapidpm.binarycache.api.BinaryCacheClient;
+import org.rapidpm.binarycache.api.CacheKey;
+
+import javax.annotation.PostConstruct;
+import javax.annotation.PreDestroy;
+import javax.cache.Cache;
+import javax.cache.Caching;
+import javax.cache.spi.CachingProvider;
+import java.net.URISyntaxException;
 
 /**
  * Copyright (C) 2010 RapidPM
@@ -17,5 +25,27 @@ import org.rapidpm.binarycache.api.BinaryCacheClient;
  * Created by RapidPM - Team on 09.03.2017.
  */
 public class EhCacheImpl implements BinaryCacheClient {
+
+  public static final String CONFIG_EHCACHE_XML = "/config/ehcache.xml";
+  private javax.cache.CacheManager cacheManager;
+
+  @PostConstruct
+  public void init() throws URISyntaxException {
+    final CachingProvider cachingProvider = Caching.getCachingProvider();
+    cacheManager = cachingProvider.getCacheManager(
+        getClass().getResource(CONFIG_EHCACHE_XML).toURI(),
+        getClass().getClassLoader()
+    );
+  }
+
+  @PreDestroy
+  public void destroy() {
+    cacheManager.close();
+  }
+
+  @Override
+  public Cache<CacheKey, Byte[]> getCache(String cacheName) {
+    return cacheManager.getCache(cacheName, CacheKey.class, Byte[].class);
+  }
 
 }

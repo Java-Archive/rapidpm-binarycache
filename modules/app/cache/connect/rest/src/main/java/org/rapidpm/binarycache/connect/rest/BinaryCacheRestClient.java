@@ -2,8 +2,6 @@ package org.rapidpm.binarycache.connect.rest;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import org.apache.commons.codec.binary.Base64InputStream;
-import org.apache.commons.io.IOUtils;
 import org.rapidpm.binarycache.api.BinaryCacheClient;
 import org.rapidpm.binarycache.api.CacheKey;
 import org.rapidpm.binarycache.api.CacheKeyAdapter;
@@ -14,12 +12,14 @@ import javax.inject.Inject;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.ObjectInputStream;
 import java.util.Base64;
 import java.util.Optional;
+
+import static org.rapidpm.binarycache.connect.rest.util.ByteUtils.fromPrimitive;
+import static org.rapidpm.binarycache.connect.rest.util.ByteUtils.toPrimitive;
 
 /**
  * Copyright (C) 2017 RapidPM - Sven Ruppert
@@ -44,20 +44,19 @@ public class BinaryCacheRestClient {
   private BinaryCacheClient binaryCacheClient;
   @Inject
   private CacheKeyAdapter adapter;
+  private static final int BUFFER_SIZE = 1024;
 
   @PUT
-  @Path("/{cacheName}/{key}")
+  @Path("{cacheName}/{key}")
   @Consumes(MediaType.APPLICATION_OCTET_STREAM)
   public Response cacheBinary(@PathParam("cacheName") final String cacheName,
                               @PathParam("key") final String key,
                               final InputStream inputStream) {
-
     final CacheKey cacheKey = decodeCacheKey(key);
 
-    try (final Base64InputStream bis = new Base64InputStream(inputStream)) {
-      final byte[] bytes = IOUtils.toByteArray(bis);
-      binaryCacheClient.cacheBinary(cacheName, cacheKey, fromPrimitive(bytes));
-      bis.close();
+    try {
+      final byte[] byteArray = receiveBytes(inputStream);
+      binaryCacheClient.cacheBinary(cacheName, cacheKey, fromPrimitive(byteArray));
       return Response.ok().build();
     } catch (IOException e) {
       LOGGER.error(String.format("failed to cache binary to cache <%s> with key <%s>", cacheName, cacheKey), e);
@@ -67,7 +66,7 @@ public class BinaryCacheRestClient {
   }
 
   @PUT
-  @Path("/cacheBinaryIfAbsent")
+  @Path("cacheBinaryIfAbsent")
   public Response cacheBinaryIfAbsent(@QueryParam("cacheName") final String cacheName,
                                       @QueryParam("key") final String cacheKey,
                                       @QueryParam("value") final String binary) {
@@ -76,23 +75,19 @@ public class BinaryCacheRestClient {
   }
 
   @GET
-  @Path("getCachedElement")
-  public Response getCachedElement(@QueryParam("cacheName") final String cacheName,
-                                   @QueryParam("key") final String cacheKey) {
-    final byte[] decode = Base64.getUrlDecoder().decode(cacheKey);
-    try (final ObjectInputStream ois = new ObjectInputStream(new ByteArrayInputStream(decode))) {
-      CacheKey decodedKey = (CacheKey) ois.readObject();
-      final Optional<Byte[]> cachedElement = binaryCacheClient.getCachedElement(cacheName, decodedKey);
-      return Response
-          .status(Response.Status.OK)
-          .entity(cachedElement)
-          .build();
-    } catch (IOException | ClassNotFoundException e) {
-      // logging
-      e.printStackTrace();
-    }
+  @Path("{cacheName}/{key}")
+  @Produces(MediaType.APPLICATION_OCTET_STREAM)
+  public Response getCachedElement(@PathParam("cacheName") final String cacheName,
+                                   @PathParam("key") final String key) {
 
-    return Response.status(Response.Status.INTERNAL_SERVER_ERROR).build();
+    final CacheKey decodedKey = decodeCacheKey(key);
+    final Optional<Byte[]> cachedElement = binaryCacheClient.getCachedElement(cacheName, decodedKey);
+    if (cachedElement.isPresent())
+      return Response.ok(toPrimitive(cachedElement.get()), MediaType.APPLICATION_OCTET_STREAM)
+          .build();
+    else
+      return Response.status(Response.Status.NOT_FOUND)
+          .build();
   }
 
   @GET
@@ -109,10 +104,8 @@ public class BinaryCacheRestClient {
     //return binaryCacheClient.removeEntry(cacheName, cacheKey);
   }
 
-
   private CacheKey decodeCacheKey(String key) {
     final byte[] decode = Base64.getUrlDecoder().decode(key);
-
     final Gson gson = new GsonBuilder()
         .registerTypeAdapter(CacheKey.class, adapter)
         .create();
@@ -120,25 +113,16 @@ public class BinaryCacheRestClient {
     return gson.fromJson(new String(decode), CacheKey.class);
   }
 
-  // TODO move to util class
-  private Byte[] fromPrimitive(byte[] primitive) {
-    Byte[] bytes = new Byte[primitive.length];
-
-    int i = 0;
-    for (byte b : primitive)
-      bytes[i++] = b;
-
-    return bytes;
+  private byte[] receiveBytes(InputStream inputStream) throws IOException {
+    final ByteArrayOutputStream baos = new ByteArrayOutputStream();
+    byte[] buffer = new byte[BUFFER_SIZE];
+    int bytesRead;
+    while ((bytesRead = inputStream.read(buffer)) > -1) {
+      baos.write(buffer, 0, bytesRead);
+    }
+    inputStream.close();
+    return baos.toByteArray();
   }
 
-  private byte[] toPrimitive(Byte[] bytes) {
-    byte[] primitive = new byte[bytes.length];
-
-    int i = 0;
-    for (Byte b : bytes)
-      primitive[i++] = b;
-
-    return primitive;
-  }
 
 }
