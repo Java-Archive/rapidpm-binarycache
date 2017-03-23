@@ -31,9 +31,8 @@
 
   <groupId>org.rapidpm.microservice</groupId>
   <artifactId>binarycache</artifactId>
-  <version>1.0.0-SNAPSHOT</version>
   <packaging>pom</packaging>
-
+  <version>1.0.0-SNAPSHOT</version>
 
   <modules>
     <module>modules</module>
@@ -116,9 +115,63 @@
         <artifactId>binarycache-modules-app-cache-provider-ehcache</artifactId>
         <version>${project.version}</version>
       </dependency>
+
+      <!--Provider-->
+      <dependency>
+        <groupId>org.ehcache</groupId>
+        <artifactId>ehcache</artifactId>
+        <version>3.3.0</version>
+      </dependency>
+
+      <dependency>
+        <groupId>org.apache.commons</groupId>
+        <artifactId>commons-jcs-core</artifactId>
+        <version>2.1</version>
+      </dependency>
+
+      <!--Provider-->
+      <dependency>
+        <groupId>org.ehcache</groupId>
+        <artifactId>ehcache</artifactId>
+        <version>3.3.0</version>
+      </dependency>
+
+      <dependency>
+        <groupId>org.apache.commons</groupId>
+        <artifactId>commons-jcs-core</artifactId>
+        <version>2.1</version>
+      </dependency>
+
+
     </dependencies>
   </dependencyManagement>
 
 
+  <build>
+    <plugins>
+    </plugins>
+  </build>
+
+  <profiles>
+    <!-- make this work -->
+    <profile>
+      <id>binarycache-gui</id>
+      <activation>
+        <activeByDefault>true</activeByDefault>
+      </activation>
+      <modules>
+        <module>modules/app/gui/</module>
+      </modules>
+    </profile>
+    <profile>
+      <id>binarycache-client</id>
+      <activation>
+        <activeByDefault>true</activeByDefault>
+      </activation>
+      <modules>
+        <module>modules/client</module>
+      </modules>
+    </profile>
+  </profiles>
 
 </project>

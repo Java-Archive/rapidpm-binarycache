@@ -9,13 +9,14 @@
     <artifactId>binarycache-modules-app-cache-provider</artifactId>
     <version>1.0.0-SNAPSHOT</version>
   </parent>
+
   <artifactId>binarycache-modules-app-cache-provider-ehcache</artifactId>
+  <version>1.0.0-SNAPSHOT</version>
 
   <dependencies>
     <dependency>
       <groupId>org.ehcache</groupId>
       <artifactId>ehcache</artifactId>
-      <version>3.3.0</version>
     </dependency>
   </dependencies>
 

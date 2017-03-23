@@ -33,7 +33,7 @@
 
   <modules>
     <module>app</module>
-    <module>client</module>
+    <!--<module>client</module>-->
   </modules>
 
 

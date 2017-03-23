@@ -102,33 +102,34 @@ public class EhCacheImplTest {
     final Result resultRemove = cacheClient.removeEntry(TEST_CACHE, new SimpleCacheKey());
     assertEquals(Result.FAILED, resultRemove);
   }
+
+  public static class SimpleCacheKey implements CacheKey {
+
+    private String key;
+
+    public SimpleCacheKey() {
+      this.key = UUID.randomUUID().toString();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+      if (this == o) return true;
+      if (o == null || getClass() != o.getClass()) return false;
+
+      SimpleCacheKey that = (SimpleCacheKey) o;
+
+      return key != null ? key.equals(that.key) : that.key == null;
+    }
+
+    @Override
+    public int hashCode() {
+      return key != null ? key.hashCode() : 0;
+    }
+
+    @Override
+    public String keyAsString() {
+      return this.key;
+    }
+  }
 }
 
-class SimpleCacheKey implements CacheKey {
-
-  private String key;
-
-  public SimpleCacheKey() {
-    this.key = UUID.randomUUID().toString();
-  }
-
-  @Override
-  public boolean equals(Object o) {
-    if (this == o) return true;
-    if (o == null || getClass() != o.getClass()) return false;
-
-    SimpleCacheKey that = (SimpleCacheKey) o;
-
-    return key != null ? key.equals(that.key) : that.key == null;
-  }
-
-  @Override
-  public int hashCode() {
-    return key != null ? key.hashCode() : 0;
-  }
-
-  @Override
-  public String keyAsString() {
-    return this.key;
-  }
-}
