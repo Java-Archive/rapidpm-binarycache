@@ -91,7 +91,7 @@ public class BinaryCacheRestClient {
                                    @PathParam("key") final String key) {
     final CacheKey decodedKey = decodeCacheKey(key);
     final Optional<Byte[]> cachedElement = binaryCacheClient.getCachedElement(cacheName, decodedKey);
-    if (cachedElement.isPresent())
+    if (cachedElement.isPresent()) // TODO stream this
       return Response.ok(toPrimitive(cachedElement.get()), MediaType.APPLICATION_OCTET_STREAM)
           .build();
     else

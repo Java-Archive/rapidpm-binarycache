@@ -15,7 +15,6 @@
   <modules>
     <module>ehcache</module>
     <module>hazelcast</module>
-    <module>jcache</module>
     <module>jcs</module>
   </modules>
 
