@@ -97,6 +97,11 @@ public class EhCacheImplTest {
     assertFalse(cachedElement.isPresent());
   }
 
+  @Test
+  public void test005() throws Exception {
+    final Result resultRemove = cacheClient.removeEntry(TEST_CACHE, new SimpleCacheKey());
+    assertEquals(Result.FAILED, resultRemove);
+  }
 }
 
 class SimpleCacheKey implements CacheKey {

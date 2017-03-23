@@ -5,6 +5,7 @@ import com.google.gson.GsonBuilder;
 import org.rapidpm.binarycache.api.BinaryCacheClient;
 import org.rapidpm.binarycache.api.CacheKey;
 import org.rapidpm.binarycache.api.CacheKeyAdapter;
+import org.rapidpm.binarycache.api.Result;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -79,7 +80,6 @@ public class BinaryCacheRestClient {
   @Produces(MediaType.APPLICATION_OCTET_STREAM)
   public Response getCachedElement(@PathParam("cacheName") final String cacheName,
                                    @PathParam("key") final String key) {
-
     final CacheKey decodedKey = decodeCacheKey(key);
     final Optional<Byte[]> cachedElement = binaryCacheClient.getCachedElement(cacheName, decodedKey);
     if (cachedElement.isPresent())
@@ -90,18 +90,22 @@ public class BinaryCacheRestClient {
           .build();
   }
 
-  @GET
-  @Path("clearCache")
-  public Response clearCache(final String cacheName) {
-    return null;
-    //return binaryCacheClient.clearCache(cacheName);
+  @DELETE
+  @Path("{cacheName}")
+  public Response clearCache(@PathParam("cacheName") final String cacheName) {
+    binaryCacheClient.clearCache(cacheName);
+    return Response.ok().build();
   }
 
-  @GET
-  @Path("removeEntry")
-  public Response removeEntry(final String cacheName, final CacheKey cacheKey) {
-    return null;
-    //return binaryCacheClient.removeEntry(cacheName, cacheKey);
+  @DELETE
+  @Path("{cacheName}/{key}")
+  public Response removeEntry(@PathParam("cacheName") final String cacheName,
+                              @PathParam("key") final String cacheKey) {
+    final Result result = binaryCacheClient.removeEntry(cacheName, decodeCacheKey(cacheKey));
+    if (result.equals(Result.OK))
+      return Response.ok().build();
+    else
+      return Response.notModified().build();
   }
 
   private CacheKey decodeCacheKey(String key) {

@@ -2,6 +2,7 @@ package org.rapidpm.binarycache.provider.ehcache;
 
 import org.rapidpm.binarycache.api.BinaryCacheClient;
 import org.rapidpm.binarycache.api.CacheKey;
+import org.rapidpm.binarycache.api.Result;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
@@ -47,5 +48,12 @@ public class EhCacheImpl implements BinaryCacheClient {
   public Cache<CacheKey, Byte[]> getCache(String cacheName) {
     return cacheManager.getCache(cacheName, CacheKey.class, Byte[].class);
   }
+
+  @Override
+  public Result removeEntry(String cacheName, CacheKey cacheKey) {
+    return cacheManager.getCache(cacheName, CacheKey.class, Byte[].class).remove(cacheKey) ? Result.OK : Result.FAILED;
+  }
+
+
 
 }
