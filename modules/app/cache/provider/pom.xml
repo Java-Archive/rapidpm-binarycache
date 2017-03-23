@@ -14,8 +14,8 @@
 
   <modules>
     <module>ehcache</module>
-    <module>hazelcast</module>
     <module>jcs</module>
+    <module>hazelcast</module>
   </modules>
 
 <dependencies>
@@ -28,6 +28,5 @@
     <artifactId>binarycache-modules-optionals-microservice</artifactId>
   </dependency>
 </dependencies>
-
 
 </project>
