@@ -110,48 +110,46 @@
         <version>${project.version}</version>
       </dependency>
 
+      <!--Provider-->
+      <dependency>
+        <groupId>org.ehcache</groupId>
+        <artifactId>ehcache</artifactId>
+        <version>3.3.0</version>
+      </dependency>
+
+      <dependency>
+        <groupId>org.apache.commons</groupId>
+        <artifactId>commons-jcs-core</artifactId>
+        <version>2.1</version>
+      </dependency>
+
 
     </dependencies>
   </dependencyManagement>
 
   <build>
     <plugins>
-
-      <!--<plugin>-->
-      <!--<groupId>org.codehaus.mojo</groupId>-->
-      <!--<artifactId>exec-maven-plugin</artifactId>-->
-      <!--<executions>-->
-      <!--<execution>-->
-      <!--<goals>-->
-      <!--<goal>exec</goal>-->
-      <!--</goals>-->
-      <!--</execution>-->
-      <!--</executions>-->
-      <!--<configuration>-->
-      <!--<executable>java</executable>-->
-      <!--<arguments>-->
-      <!--<argument>-classpath</argument>-->
-      <!--<classpath/>-->
-      <!--<argument>org.openjdk.jmh.Main</argument>-->
-      <!--</arguments>-->
-      <!--<workingDirectory>${project.build.outputDirectory}</workingDirectory>-->
-      <!--</configuration>-->
-      <!--</plugin>-->
-
     </plugins>
   </build>
 
   <profiles>
     <!-- make this work -->
     <profile>
-      <id>binarycache-rest-jcs</id>
+      <id>binarycache-gui</id>
       <activation>
-        <activeByDefault>false</activeByDefault>
+        <activeByDefault>true</activeByDefault>
       </activation>
       <modules>
-        <module>modules/app/cache/api</module>
-        <module>modules/app/cache/connect/rest</module>
-        <module>modules/app/cache/provider/jcache</module>
+        <module>modules/app/gui/</module>
+      </modules>
+    </profile>
+    <profile>
+      <id>binarycache-client</id>
+      <activation>
+        <activeByDefault>true</activeByDefault>
+      </activation>
+      <modules>
+        <module>modules/client</module>
       </modules>
     </profile>
   </profiles>
