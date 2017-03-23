@@ -67,12 +67,21 @@ public class BinaryCacheRestClient {
   }
 
   @PUT
-  @Path("cacheBinaryIfAbsent")
-  public Response cacheBinaryIfAbsent(@QueryParam("cacheName") final String cacheName,
-                                      @QueryParam("key") final String cacheKey,
-                                      @QueryParam("value") final String binary) {
-    return null;
-    //return binaryCacheClient.cacheBinaryIfAbsent(cacheName, cacheKey, binary);
+  @Path("{cacheName}/ifabsent/{key}")
+  public Response cacheBinaryIfAbsent(@PathParam("cacheName") final String cacheName,
+                                      @PathParam("key") final String key,
+                                      final InputStream inputStream) {
+    final CacheKey cacheKey = decodeCacheKey(key);
+
+    try {
+      final byte[] byteArray = receiveBytes(inputStream);
+      binaryCacheClient.cacheBinaryIfAbsent(cacheName, cacheKey, fromPrimitive(byteArray));
+      return Response.ok().build();
+    } catch (IOException e) {
+      LOGGER.error(String.format("failed to cache binary to cache <%s> with key <%s>", cacheName, cacheKey), e);
+    }
+
+    return Response.serverError().build();
   }
 
   @GET
