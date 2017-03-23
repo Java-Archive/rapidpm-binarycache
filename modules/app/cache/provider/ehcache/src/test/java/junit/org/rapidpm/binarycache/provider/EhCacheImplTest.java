@@ -31,26 +31,22 @@ import static org.junit.Assert.*;
  */
 public class EhCacheImplTest {
 
-  public static final String TEST_CACHE = "testCache";
-
+  public static final String TEST_CACHE = "default";
+  public static final Byte[] BYTES = new Byte[]{Byte.valueOf("123")};
 
   @Inject
-  EhCacheImpl cacheClient;
-  public static final Byte[] BYTES = new Byte[]{Byte.valueOf("123")};
+  private EhCacheImpl cacheClient;
 
   @Before
   public void setUp() throws Exception {
     DI.clearReflectionModel();
     DI.activatePackages("org.rapidpm");
     DI.activateDI(this);
-    //cacheClient.init();
-    cacheClient.createCache(TEST_CACHE);
   }
 
   @After
   public void tearDown() throws Exception {
     cacheClient.clearCache(TEST_CACHE);
-    cacheClient.getCache(TEST_CACHE).close();
   }
 
   @Test
@@ -101,6 +97,11 @@ public class EhCacheImplTest {
     assertFalse(cachedElement.isPresent());
   }
 
+  @Test
+  public void test005() throws Exception {
+    final Result resultRemove = cacheClient.removeEntry(TEST_CACHE, new SimpleCacheKey());
+    assertEquals(Result.FAILED, resultRemove);
+  }
 }
 
 class SimpleCacheKey implements CacheKey {
