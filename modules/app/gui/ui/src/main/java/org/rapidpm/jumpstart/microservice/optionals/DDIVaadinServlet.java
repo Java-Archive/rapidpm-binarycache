@@ -17,7 +17,7 @@
  * under the License.
  */
 
-package org.rapidpm.jumpstart.microservice.optionals.vaadin;
+package org.rapidpm.jumpstart.microservice.optionals;
 
 import com.vaadin.server.DeploymentConfiguration;
 import com.vaadin.server.ServiceException;

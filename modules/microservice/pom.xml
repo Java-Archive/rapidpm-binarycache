@@ -37,10 +37,10 @@
       <artifactId>rapidpm-microservice-modules-core</artifactId>
       <scope>provided</scope>
     </dependency>
-    <dependency>
+    <!--dependency>
       <groupId>com.vaadin</groupId>
       <artifactId>vaadin-client</artifactId>
-    </dependency>
+    </dependency -->
     <!--<dependency>-->
       <!--<groupId>com.vaadin</groupId>-->
       <!--<artifactId>vaadin-client-compiled</artifactId>-->
@@ -59,10 +59,10 @@
 
   <build>
     <plugins>
-      <plugin>
+      <!-- plugin>
         <groupId>com.vaadin</groupId>
         <artifactId>vaadin-maven-plugin</artifactId>
-        <version>${vaadin.version}</version>
+        <version>${vaadin.version}</version>-->
         <!--<executions>-->
           <!--<execution>-->
             <!--<goals>-->
@@ -74,7 +74,7 @@
             <!--</goals>-->
           <!--</execution>-->
         <!--</executions>-->
-      </plugin>
+      <!--/plugin>-->
       <!--plugin>
         <groupId>com.vaadin.wscdn</groupId>
         <artifactId>wscdn-maven-plugin</artifactId>

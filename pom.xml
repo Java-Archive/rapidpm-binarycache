@@ -31,14 +31,16 @@
 
   <groupId>org.rapidpm.microservice</groupId>
   <artifactId>binarycache</artifactId>
-  <packaging>pom</packaging>
   <version>1.0.0-SNAPSHOT</version>
+  <packaging>pom</packaging>
+
 
   <modules>
     <module>modules</module>
+    <module>aggregate</module>
   </modules>
 
-  <inceptionYear>2013</inceptionYear>
+  <inceptionYear>2017</inceptionYear>
   <organization>
     <name>RapidPM</name>
     <url>http://www.rapidpm.org</url>
@@ -109,51 +111,14 @@
         <artifactId>binarycache-modules-app-cache-api</artifactId>
         <version>${project.version}</version>
       </dependency>
-
-
+      <dependency>
+        <groupId>org.rapidpm.microservice</groupId>
+        <artifactId>binarycache-modules-app-cache-provider-ehcache</artifactId>
+        <version>${project.version}</version>
+      </dependency>
     </dependencies>
   </dependencyManagement>
 
-  <build>
-    <plugins>
 
-      <!--<plugin>-->
-      <!--<groupId>org.codehaus.mojo</groupId>-->
-      <!--<artifactId>exec-maven-plugin</artifactId>-->
-      <!--<executions>-->
-      <!--<execution>-->
-      <!--<goals>-->
-      <!--<goal>exec</goal>-->
-      <!--</goals>-->
-      <!--</execution>-->
-      <!--</executions>-->
-      <!--<configuration>-->
-      <!--<executable>java</executable>-->
-      <!--<arguments>-->
-      <!--<argument>-classpath</argument>-->
-      <!--<classpath/>-->
-      <!--<argument>org.openjdk.jmh.Main</argument>-->
-      <!--</arguments>-->
-      <!--<workingDirectory>${project.build.outputDirectory}</workingDirectory>-->
-      <!--</configuration>-->
-      <!--</plugin>-->
-
-    </plugins>
-  </build>
-
-  <profiles>
-    <!-- make this work -->
-    <profile>
-      <id>binarycache-rest-jcs</id>
-      <activation>
-        <activeByDefault>false</activeByDefault>
-      </activation>
-      <modules>
-        <module>modules/app/cache/api</module>
-        <module>modules/app/cache/connect/rest</module>
-        <module>modules/app/cache/provider/jcache</module>
-      </modules>
-    </profile>
-  </profiles>
 
 </project>

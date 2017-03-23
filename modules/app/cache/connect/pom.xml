@@ -11,10 +11,10 @@
 
   <artifactId>binarycache-modules-app-cache-connect</artifactId>
   <packaging>pom</packaging>
+
   <modules>
     <module>rest</module>
   </modules>
-
 
   <dependencies>
     <dependency>
