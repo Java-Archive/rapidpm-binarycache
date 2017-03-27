@@ -4,6 +4,7 @@ import org.apache.commons.jcs.JCS;
 import org.apache.commons.jcs.access.CacheAccess;
 import org.apache.commons.jcs.access.exception.CacheException;
 import org.rapidpm.binarycache.api.BinaryCacheClient;
+import org.rapidpm.binarycache.api.CacheByteArray;
 import org.rapidpm.binarycache.api.CacheKey;
 import org.rapidpm.binarycache.api.Result;
 
@@ -28,30 +29,30 @@ import java.util.Optional;
 public class JcsCacheImpl implements BinaryCacheClient {
 
   @Override
-  public Cache<CacheKey, Byte[]> getCache(String cacheName) {
+  public Cache<CacheKey, CacheByteArray> getCache(String cacheName) {
     throw new UnsupportedOperationException("not implemented");
   }
 
   @Override
-  public Cache<CacheKey, Byte[]> createCache(String cacheName) {
+  public Cache<CacheKey, CacheByteArray> createCache(String cacheName) {
     throw new UnsupportedOperationException("not implemented");
   }
 
   @Override
-  public Cache<CacheKey, Byte[]> createCache(String cacheName, Configuration<CacheKey, Byte[]> configuration) {
+  public Cache<CacheKey, CacheByteArray> createCache(String cacheName, Configuration<CacheKey, CacheByteArray> configuration) {
     throw new UnsupportedOperationException("not implemented");
   }
 
   @Override
-  public Result cacheBinary(String cacheName, CacheKey cacheKey, Byte[] binary) {
+  public Result cacheBinary(String cacheName, CacheKey cacheKey, CacheByteArray binary) {
     final CacheAccess<Object, Object> instance = JCS.getInstance(cacheName);
     instance.put(cacheKey, binary);
     return Result.OK;
   }
 
   @Override
-  public Result cacheBinaryIfAbsent(String cacheName, CacheKey cacheKey, Byte[] binary) {
-    final CacheAccess<CacheKey, Byte[]> instance = JCS.getInstance(cacheName);
+  public Result cacheBinaryIfAbsent(String cacheName, CacheKey cacheKey, CacheByteArray binary) {
+    final CacheAccess<CacheKey, CacheByteArray> instance = JCS.getInstance(cacheName);
     try {
       instance.putSafe(cacheKey, binary);
     } catch (CacheException e) {
@@ -61,8 +62,8 @@ public class JcsCacheImpl implements BinaryCacheClient {
   }
 
   @Override
-  public Optional<Byte[]> getCachedElement(String cacheName, CacheKey cacheKey) {
-    final CacheAccess<CacheKey, Byte[]> instance = JCS.getInstance(cacheName);
+  public Optional<CacheByteArray> getCachedElement(String cacheName, CacheKey cacheKey) {
+    final CacheAccess<CacheKey, CacheByteArray> instance = JCS.getInstance(cacheName);
     return Optional.ofNullable(instance.get(cacheKey));
   }
 

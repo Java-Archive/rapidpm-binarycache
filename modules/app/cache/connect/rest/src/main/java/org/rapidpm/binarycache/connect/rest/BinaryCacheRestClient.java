@@ -2,10 +2,7 @@ package org.rapidpm.binarycache.connect.rest;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import org.rapidpm.binarycache.api.BinaryCacheClient;
-import org.rapidpm.binarycache.api.CacheKey;
-import org.rapidpm.binarycache.api.CacheKeyAdapter;
-import org.rapidpm.binarycache.api.Result;
+import org.rapidpm.binarycache.api.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -13,14 +10,12 @@ import javax.inject.Inject;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Base64;
 import java.util.Optional;
-
-import static org.rapidpm.binarycache.connect.rest.util.ByteUtils.fromPrimitive;
-import static org.rapidpm.binarycache.connect.rest.util.ByteUtils.toPrimitive;
 
 /**
  * Copyright (C) 2017 RapidPM - Sven Ruppert
@@ -57,7 +52,8 @@ public class BinaryCacheRestClient {
 
     try {
       final byte[] byteArray = receiveBytes(inputStream);
-      binaryCacheClient.cacheBinary(cacheName, cacheKey, fromPrimitive(byteArray));
+
+      binaryCacheClient.cacheBinary(cacheName, cacheKey, new CacheByteArray(byteArray));
       return Response.ok().build();
     } catch (IOException e) {
       LOGGER.error(String.format("failed to cache binary to cache <%s> with key <%s>", cacheName, cacheKey), e);
@@ -75,7 +71,7 @@ public class BinaryCacheRestClient {
 
     try {
       final byte[] byteArray = receiveBytes(inputStream);
-      binaryCacheClient.cacheBinaryIfAbsent(cacheName, cacheKey, fromPrimitive(byteArray));
+      binaryCacheClient.cacheBinaryIfAbsent(cacheName, cacheKey, new CacheByteArray(byteArray));
       return Response.ok().build();
     } catch (IOException e) {
       LOGGER.error(String.format("failed to cache binary to cache <%s> with key <%s>", cacheName, cacheKey), e);
@@ -90,9 +86,9 @@ public class BinaryCacheRestClient {
   public Response getCachedElement(@PathParam("cacheName") final String cacheName,
                                    @PathParam("key") final String key) {
     final CacheKey decodedKey = decodeCacheKey(key);
-    final Optional<Byte[]> cachedElement = binaryCacheClient.getCachedElement(cacheName, decodedKey);
+    final Optional<CacheByteArray> cachedElement = binaryCacheClient.getCachedElement(cacheName, decodedKey);
     if (cachedElement.isPresent()) // TODO stream this
-      return Response.ok(toPrimitive(cachedElement.get()), MediaType.APPLICATION_OCTET_STREAM)
+      return Response.ok(new ByteArrayInputStream(cachedElement.get().byteArray), MediaType.APPLICATION_OCTET_STREAM)
           .build();
     else
       return Response.status(Response.Status.NOT_FOUND)

@@ -1,6 +1,7 @@
 package org.rapidpm.binarycache.provider.ehcache;
 
 import org.rapidpm.binarycache.api.BinaryCacheClient;
+import org.rapidpm.binarycache.api.CacheByteArray;
 import org.rapidpm.binarycache.api.CacheKey;
 import org.rapidpm.binarycache.api.Result;
 
@@ -45,13 +46,13 @@ public class EhCacheImpl implements BinaryCacheClient {
   }
 
   @Override
-  public Cache<CacheKey, Byte[]> getCache(String cacheName) {
-    return cacheManager.getCache(cacheName, CacheKey.class, Byte[].class);
+  public Cache<CacheKey, CacheByteArray> getCache(String cacheName) {
+    return cacheManager.getCache(cacheName, CacheKey.class, CacheByteArray.class);
   }
 
   @Override
   public Result removeEntry(String cacheName, CacheKey cacheKey) {
-    return cacheManager.getCache(cacheName, CacheKey.class, Byte[].class).remove(cacheKey) ? Result.OK : Result.FAILED;
+    return cacheManager.getCache(cacheName, CacheKey.class, CacheByteArray.class).remove(cacheKey) ? Result.OK : Result.FAILED;
   }
 
 

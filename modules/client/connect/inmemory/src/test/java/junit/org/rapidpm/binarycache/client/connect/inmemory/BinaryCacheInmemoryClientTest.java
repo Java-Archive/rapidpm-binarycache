@@ -4,6 +4,7 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.rapidpm.binarycache.api.BinaryCacheClient;
+import org.rapidpm.binarycache.api.CacheByteArray;
 import org.rapidpm.binarycache.api.CacheKey;
 import org.rapidpm.ddi.DI;
 
@@ -38,7 +39,7 @@ public class BinaryCacheInmemoryClientTest {
 
   @Test
   public void test001() throws Exception {
-    final Cache<CacheKey, Byte[]> test = client.createCache("test");
+    final Cache<CacheKey, CacheByteArray> test = client.createCache("test");
     Assert.assertNotNull(test);
   }
 }

@@ -1,6 +1,7 @@
 package org.rapidpm.binarycache.client.connect.rest;
 
 import org.rapidpm.binarycache.api.BinaryCacheClient;
+import org.rapidpm.binarycache.api.CacheByteArray;
 import org.rapidpm.binarycache.api.CacheKey;
 import org.rapidpm.binarycache.api.Result;
 
@@ -28,22 +29,22 @@ public class BinaryCacheRestClient implements BinaryCacheClient {
   //create REST request methods , delegate to binaryCacheClient
 
   @Override
-  public Cache<CacheKey, Byte[]> getCache(final String cacheName) {
+  public Cache<CacheKey, CacheByteArray> getCache(final String cacheName) {
     throw new RuntimeException("not allowed remote");
   }
 
   @Override
-  public Result cacheBinary(final String cacheName, final CacheKey cacheKey, final Byte[] binary) {
+  public Result cacheBinary(final String cacheName, final CacheKey cacheKey, final CacheByteArray binary) {
     return null;
   }
 
   @Override
-  public Result cacheBinaryIfAbsent(final String cacheName, final CacheKey cacheKey, final Byte[] binary) {
+  public Result cacheBinaryIfAbsent(final String cacheName, final CacheKey cacheKey, final CacheByteArray binary) {
     return null;
   }
 
   @Override
-  public Optional<Byte[]> getCachedElement(final String cacheName, final CacheKey cacheKey) {
+  public Optional<CacheByteArray> getCachedElement(final String cacheName, final CacheKey cacheKey) {
     return null;
   }
 

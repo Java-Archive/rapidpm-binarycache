@@ -82,7 +82,7 @@ public class BinaryCacheRestClientTest001 extends BaseBinaryCacheRestTest {
 
   @Test
   public void test003() throws Exception {
-    final File value = new File(this.getClass().getResource("testpic.png").toURI());
+    final File value = new File(this.getClass().getResource("ideaIU-2017.1.exe").toURI());
     final DefaultCacheKey key = new DefaultCacheKey("123");
 
     final String targetUrl = generateTestUrl(url, encodedKey(key));

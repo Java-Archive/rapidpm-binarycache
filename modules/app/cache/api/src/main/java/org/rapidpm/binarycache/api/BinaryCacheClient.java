@@ -25,39 +25,39 @@ import java.util.Optional;
 public interface BinaryCacheClient {
 
   /* make private with Java9 */
-  default Cache<CacheKey, Byte[]> getCache(String cacheName) {
+  default Cache<CacheKey, CacheByteArray> getCache(String cacheName) {
     final CachingProvider cachingProvider = Caching.getCachingProvider();
     final CacheManager cacheManager = cachingProvider.getCacheManager();
-    return cacheManager.getCache(cacheName, CacheKey.class, Byte[].class);
+    return cacheManager.getCache(cacheName, CacheKey.class, CacheByteArray.class);
   }
 
-  default Cache<CacheKey, Byte[]> createCache(String cacheName) {
+  default Cache<CacheKey, CacheByteArray> createCache(String cacheName) {
     final CachingProvider cachingProvider = Caching.getCachingProvider();
     final CacheManager cacheManager = cachingProvider.getCacheManager();
-    final MutableConfiguration<CacheKey, Byte[]> mutableConfiguration = new MutableConfiguration<CacheKey, Byte[]>()
-        .setTypes(CacheKey.class, Byte[].class);
+    final MutableConfiguration<CacheKey, CacheByteArray> mutableConfiguration = new MutableConfiguration<CacheKey, CacheByteArray>()
+        .setTypes(CacheKey.class, CacheByteArray.class);
     return cacheManager.createCache(cacheName, mutableConfiguration);
   }
 
-  default Cache<CacheKey, Byte[]> createCache(String cacheName, Configuration<CacheKey, Byte[]> configuration) {
+  default Cache<CacheKey, CacheByteArray> createCache(String cacheName, Configuration<CacheKey, CacheByteArray> configuration) {
     final CachingProvider cachingProvider = Caching.getCachingProvider();
     final CacheManager cacheManager = cachingProvider.getCacheManager();
     return cacheManager.createCache(cacheName, configuration);
   }
 
-  default Result cacheBinary(String cacheName, CacheKey cacheKey, Byte[] binary) {
-    final Cache<CacheKey, Byte[]> cache = getCache(cacheName);
+  default Result cacheBinary(String cacheName, CacheKey cacheKey, CacheByteArray binary) {
+    final Cache<CacheKey, CacheByteArray> cache = getCache(cacheName);
     cache.put(cacheKey, binary);
     return Result.OK;
   }
 
-  default Result cacheBinaryIfAbsent(String cacheName, CacheKey cacheKey, Byte[] binary) {
-    final Cache<CacheKey, Byte[]> cache = getCache(cacheName);
+  default Result cacheBinaryIfAbsent(String cacheName, CacheKey cacheKey, CacheByteArray binary) {
+    final Cache<CacheKey, CacheByteArray> cache = getCache(cacheName);
     final boolean ifAbsent = cache.putIfAbsent(cacheKey, binary);
     return Result.OK;
   }
 
-  default Optional<Byte[]> getCachedElement(String cacheName, CacheKey cacheKey) {
+  default Optional<CacheByteArray> getCachedElement(String cacheName, CacheKey cacheKey) {
     return Optional.ofNullable(getCache(cacheName).get(cacheKey));
   }
 

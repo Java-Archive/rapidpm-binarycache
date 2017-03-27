@@ -12,13 +12,12 @@
 
   <ehcache:cache-template name="defaultTemplate">
     <ehcache:key-type>org.rapidpm.binarycache.api.CacheKey</ehcache:key-type>
-    <ehcache:value-type>[Ljava.lang.Byte;</ehcache:value-type>
+    <ehcache:value-type>org.rapidpm.binarycache.api.CacheByteArray</ehcache:value-type>
     <ehcache:expiry>
       <ehcache:tti unit="minutes">30</ehcache:tti>
     </ehcache:expiry>
     <ehcache:heap unit="entries">200</ehcache:heap>
   </ehcache:cache-template>
-
 
   <!--
     <ehcache:cache alias="default">
