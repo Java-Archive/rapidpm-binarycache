@@ -8,6 +8,7 @@ import org.rapidpm.binarycache.api.Result;
 import javax.cache.Cache;
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
+import java.util.Objects;
 import java.util.Optional;
 
 /**
@@ -25,6 +26,37 @@ import java.util.Optional;
  * Created by Sven Ruppert - RapidPM - Team on 07.03.17.
  */
 public class BinaryCacheRestClient implements BinaryCacheClient {
+
+  public static final String DEFAULT_PORT = "8080";
+  public static final String DEFAULT_IP = "127.0.0.1";
+  private final String serverIp;
+  private final String serverPort;
+
+  public BinaryCacheRestClient() {
+    serverIp = DEFAULT_IP;
+    serverPort = DEFAULT_PORT;
+  }
+
+  public BinaryCacheRestClient(final String serverIp, final String serverPort) {
+    if(Objects.isNull(serverIp)) throw new NullPointerException("serverIP is null");
+    if(Objects.isNull(serverPort)) throw new NullPointerException("serverPort is null");
+    this.serverIp = serverIp;
+    this.serverPort = serverPort;
+  }
+
+  public BinaryCacheRestClient(final int serverPort) {
+    this.serverIp = DEFAULT_IP;
+    this.serverPort = String.valueOf(serverPort);
+  }
+
+  public BinaryCacheRestClient(final String serverIp) {
+    if(Objects.isNull(serverIp)) throw new NullPointerException("serverIP is null");
+    this.serverIp = serverIp;
+    this.serverPort = DEFAULT_PORT;
+  }
+
+
+
 
   //create REST request methods , delegate to binaryCacheClient
 
@@ -51,7 +83,8 @@ public class BinaryCacheRestClient implements BinaryCacheClient {
   @Override
   public Result clearCache(final String cacheName) {
     Client client = ClientBuilder.newClient();
-    final String generateBasicReqURL = "http://" + "127.0.0.1" + ":" + "8090" + "/" + "rest" + "/" + "REST-APP" + "/" + "params";
+
+    final String generateBasicReqURL = "http://" + serverIp + ":" + serverPort + "/" + "rest" + "/" + "REST-APP" + "/" + "params";
     String val = client
         .target(generateBasicReqURL)
         .request()
