@@ -22,7 +22,7 @@ import java.util.Optional;
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- *
+ * <p>
  * Created by Sven Ruppert - RapidPM - Team on 07.03.17.
  */
 public class BinaryCacheRestClient implements BinaryCacheClient {
@@ -38,8 +38,8 @@ public class BinaryCacheRestClient implements BinaryCacheClient {
   }
 
   public BinaryCacheRestClient(final String serverIp, final String serverPort) {
-    if(Objects.isNull(serverIp)) throw new NullPointerException("serverIP is null");
-    if(Objects.isNull(serverPort)) throw new NullPointerException("serverPort is null");
+    if (Objects.isNull(serverIp)) throw new NullPointerException("serverIP is null");
+    if (Objects.isNull(serverPort)) throw new NullPointerException("serverPort is null");
     this.serverIp = serverIp;
     this.serverPort = serverPort;
   }
@@ -50,12 +50,10 @@ public class BinaryCacheRestClient implements BinaryCacheClient {
   }
 
   public BinaryCacheRestClient(final String serverIp) {
-    if(Objects.isNull(serverIp)) throw new NullPointerException("serverIP is null");
+    if (Objects.isNull(serverIp)) throw new NullPointerException("serverIP is null");
     this.serverIp = serverIp;
     this.serverPort = DEFAULT_PORT;
   }
-
-
 
 
   //create REST request methods , delegate to binaryCacheClient
