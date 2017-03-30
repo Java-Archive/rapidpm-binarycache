@@ -10,10 +10,7 @@ import javax.inject.Inject;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
+import java.io.*;
 import java.util.Base64;
 import java.util.Optional;
 
@@ -87,7 +84,7 @@ public class BinaryCacheRestClient {
                                    @PathParam("key") final String key) {
     final CacheKey decodedKey = decodeCacheKey(key);
     final Optional<CacheByteArray> cachedElement = binaryCacheClient.getCachedElement(cacheName, decodedKey);
-    if (cachedElement.isPresent()) // TODO stream this
+    if (cachedElement.isPresent())
       return Response.ok(new ByteArrayInputStream(cachedElement.get().byteArray), MediaType.APPLICATION_OCTET_STREAM)
           .build();
     else
@@ -123,8 +120,8 @@ public class BinaryCacheRestClient {
   }
 
   private byte[] receiveBytes(InputStream inputStream) throws IOException {
-    final ByteArrayOutputStream baos = new ByteArrayOutputStream();
-    byte[] buffer = new byte[BUFFER_SIZE];
+    final ByteArrayOutputStream baos = new ByteArrayOutputStream(BUFFER_SIZE * BUFFER_SIZE);
+    byte[] buffer = new byte[BUFFER_SIZE * BUFFER_SIZE];
     int bytesRead;
     while ((bytesRead = inputStream.read(buffer)) > -1) {
       baos.write(buffer, 0, bytesRead);

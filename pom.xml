@@ -162,6 +162,28 @@
 
   <build>
     <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-surefire-plugin</artifactId>
+        <inherited>true</inherited>
+        <configuration>
+          <includes>
+            <include>**/junit/**</include>
+          </includes>
+          <excludes>
+            <exclude>**/*ini/**</exclude>
+            <exclude>**/*txt/**</exclude>
+            <exclude>**/*.jpg</exclude>
+
+          </excludes>
+          <argLine>-Xmx512m -Dsonar.pitest.mode=reuseReport</argLine>
+          <threadCount>4</threadCount>
+          <forkMode>always</forkMode>
+
+          <reportFormat>xml</reportFormat>
+          <reportFormat>html</reportFormat>
+        </configuration>
+      </plugin>
     </plugins>
   </build>
 
