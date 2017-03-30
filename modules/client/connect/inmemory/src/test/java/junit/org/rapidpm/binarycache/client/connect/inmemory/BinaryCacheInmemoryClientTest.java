@@ -1,15 +1,20 @@
 package junit.org.rapidpm.binarycache.client.connect.inmemory;
 
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.rapidpm.binarycache.api.BinaryCacheClient;
 import org.rapidpm.binarycache.api.CacheByteArray;
 import org.rapidpm.binarycache.api.CacheKey;
+import org.rapidpm.binarycache.api.defaultkey.DefaultCacheKey;
 import org.rapidpm.ddi.DI;
 
 import javax.cache.Cache;
 import javax.inject.Inject;
+
+import java.util.Optional;
+
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 
 /**
  * Copyright (C) 2010 RapidPM
@@ -27,6 +32,7 @@ import javax.inject.Inject;
  */
 public class BinaryCacheInmemoryClientTest {
 
+  public static final String DEFAULT_CACHE = "default";
   @Inject
   BinaryCacheClient client;
 
@@ -40,6 +46,19 @@ public class BinaryCacheInmemoryClientTest {
   @Test
   public void test001() throws Exception {
     final Cache<CacheKey, CacheByteArray> test = client.createCache("test");
-    Assert.assertNotNull(test);
+    assertNotNull(test);
+    final Cache<CacheKey, CacheByteArray> cache = client.getCache(DEFAULT_CACHE);
+    assertNotNull(cache);
+  }
+
+  @Test
+  public void test003() throws Exception {
+    final DefaultCacheKey key = new DefaultCacheKey("123");
+    final byte[] value = "test".getBytes();
+
+    client.cacheBinary(DEFAULT_CACHE, key, new CacheByteArray(value));
+    final Optional<CacheByteArray> cachedElement = client.getCachedElement(DEFAULT_CACHE, key);
+
+    assertTrue(cachedElement.isPresent());
   }
 }

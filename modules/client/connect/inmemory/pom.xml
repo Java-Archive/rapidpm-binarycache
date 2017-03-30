@@ -16,7 +16,6 @@
     <dependency>
       <groupId>org.rapidpm.microservice</groupId>
       <artifactId>binarycache-modules-app-cache-provider-ehcache</artifactId>
-      <version>1.0.0-SNAPSHOT</version>
       <scope>test</scope>
     </dependency>
   </dependencies>
