@@ -50,6 +50,7 @@ public class EhCacheImplTest {
   @After
   public void tearDown() throws Exception {
     cacheClient.clearCache(TEST_CACHE);
+    DI.clearReflectionModel();
   }
 
   @Test

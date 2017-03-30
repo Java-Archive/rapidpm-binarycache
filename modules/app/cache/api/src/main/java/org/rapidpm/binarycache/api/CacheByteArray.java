@@ -1,5 +1,7 @@
 package org.rapidpm.binarycache.api;
 
+import java.io.Serializable;
+
 /**
  * Copyright (C) 2010 RapidPM
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -14,7 +16,7 @@ package org.rapidpm.binarycache.api;
  * <p>
  * Created by RapidPM - Team on 27.03.2017.
  */
-public class CacheByteArray {
+public class CacheByteArray implements Serializable {
 
   public byte[] byteArray;
 

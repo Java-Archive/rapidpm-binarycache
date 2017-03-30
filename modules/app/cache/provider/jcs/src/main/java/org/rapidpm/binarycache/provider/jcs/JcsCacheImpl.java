@@ -1,4 +1,4 @@
-package junit.org.rapidpm.binarycache.provider.jcs;
+package org.rapidpm.binarycache.provider.jcs;
 
 import org.apache.commons.jcs.JCS;
 import org.apache.commons.jcs.access.CacheAccess;
@@ -8,9 +8,12 @@ import org.rapidpm.binarycache.api.CacheByteArray;
 import org.rapidpm.binarycache.api.CacheKey;
 import org.rapidpm.binarycache.api.Result;
 
+import javax.annotation.PostConstruct;
 import javax.cache.Cache;
 import javax.cache.configuration.Configuration;
+import java.io.IOException;
 import java.util.Optional;
+import java.util.Properties;
 
 /**
  * Copyright (C) 2010 RapidPM
@@ -28,9 +31,16 @@ import java.util.Optional;
  */
 public class JcsCacheImpl implements BinaryCacheClient {
 
-  @Override
-  public Cache<CacheKey, CacheByteArray> getCache(String cacheName) {
-    throw new UnsupportedOperationException("not implemented");
+  private static final String CONFIG_FILENAME = "/config/cache.ccf";
+  private CacheAccess<CacheKey, CacheByteArray> cache;
+
+  @PostConstruct
+  public void init() throws IOException {
+    final Properties properties = new Properties();
+    properties.load(getClass().getResourceAsStream(CONFIG_FILENAME));
+    JCS.setConfigProperties(properties);
+
+    cache = JCS.getInstance("default");
   }
 
   @Override
@@ -40,6 +50,11 @@ public class JcsCacheImpl implements BinaryCacheClient {
 
   @Override
   public Cache<CacheKey, CacheByteArray> createCache(String cacheName, Configuration<CacheKey, CacheByteArray> configuration) {
+    throw new UnsupportedOperationException("not implemented");
+  }
+
+  @Override
+  public Cache<CacheKey, CacheByteArray> getCache(String cacheName) {
     throw new UnsupportedOperationException("not implemented");
   }
 

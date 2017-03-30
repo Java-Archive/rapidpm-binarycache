@@ -95,6 +95,22 @@
       </dependencies>
     </profile>
     <profile>
+      <id>binarycache-connect-inmemory</id>
+      <activation>
+        <activeByDefault>false</activeByDefault>
+      </activation>
+      <properties>
+        <connect>inmemory</connect>
+      </properties>
+      <dependencies>
+        <dependency>
+          <groupId>org.rapidpm.microservice</groupId>
+          <artifactId>binarycache-modules-client-connect-inmemory</artifactId>
+          <version>${project.version}</version>
+        </dependency>
+      </dependencies>
+    </profile>
+    <profile>
       <id>binarycache-provider-ehcache</id>
       <activation>
         <activeByDefault>true</activeByDefault>
@@ -106,6 +122,22 @@
         <dependency>
           <groupId>org.rapidpm.microservice</groupId>
           <artifactId>binarycache-modules-app-cache-provider-ehcache</artifactId>
+          <version>${project.version}</version>
+        </dependency>
+      </dependencies>
+    </profile>
+    <profile>
+      <id>binarycache-provider-hazelcast</id>
+      <activation>
+        <activeByDefault>false</activeByDefault>
+      </activation>
+      <properties>
+        <provider>hazelcast</provider>
+      </properties>
+      <dependencies>
+        <dependency>
+          <groupId>org.rapidpm.microservice</groupId>
+          <artifactId>binarycache-modules-app-cache-provider-hazelcast</artifactId>
           <version>${project.version}</version>
         </dependency>
       </dependencies>
