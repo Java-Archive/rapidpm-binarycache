@@ -68,9 +68,6 @@ public class BinaryCacheRestClientTest006 extends BaseBinaryCacheRestTest {
     assertTrue(FileUtils.contentEquals(value, path.toFile()));
   }
 
-
-
-
 }
 
 

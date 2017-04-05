@@ -1,13 +1,17 @@
 package org.rapidpm.binarycache.client.connect.rest;
 
-import org.rapidpm.binarycache.api.BinaryCacheClient;
-import org.rapidpm.binarycache.api.CacheByteArray;
-import org.rapidpm.binarycache.api.CacheKey;
-import org.rapidpm.binarycache.api.Result;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import org.rapidpm.binarycache.api.*;
 
 import javax.cache.Cache;
+import javax.inject.Inject;
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
+import javax.ws.rs.client.Entity;
+import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
+import java.util.Base64;
 import java.util.Objects;
 import java.util.Optional;
 
@@ -26,6 +30,9 @@ import java.util.Optional;
  * Created by Sven Ruppert - RapidPM - Team on 07.03.17.
  */
 public class BinaryCacheRestClient implements BinaryCacheClient {
+
+  @Inject
+  private CacheKeyAdapter adapter;
 
   public static final String DEFAULT_PORT = "8080";
   public static final String DEFAULT_IP = "127.0.0.1";
@@ -65,7 +72,15 @@ public class BinaryCacheRestClient implements BinaryCacheClient {
 
   @Override
   public Result cacheBinary(final String cacheName, final CacheKey cacheKey, final CacheByteArray binary) {
-    return null;
+    final String encodedKey = encodeKey(cacheKey);
+    final String targetUrl = buildTargetUrl(cacheName, encodedKey);
+    final Client client = ClientBuilder.newClient();
+
+    final Response response = client.target(targetUrl)
+        .request()
+        .put(Entity.entity(binary.byteArray, MediaType.APPLICATION_OCTET_STREAM));
+
+    return response.getStatus() == Response.Status.OK.getStatusCode() ? Result.OK : Result.FAILED;
   }
 
   @Override
@@ -75,7 +90,22 @@ public class BinaryCacheRestClient implements BinaryCacheClient {
 
   @Override
   public Optional<CacheByteArray> getCachedElement(final String cacheName, final CacheKey cacheKey) {
-    return null;
+    final String encodedKey = encodeKey(cacheKey);
+    final Client client = ClientBuilder.newClient();
+
+    final String targetUrl = buildTargetUrl(cacheName, encodedKey);
+    final Response response = client.target(targetUrl)
+        .request()
+        .get();
+    final byte[] bytes = response.readEntity(byte[].class);
+    if (bytes.length > 0)
+      return Optional.of(new CacheByteArray(bytes));
+    else
+      return Optional.empty();
+  }
+
+  private String buildTargetUrl(String cacheName, String encodedKey) {
+    return String.format("http://%s:%s/rest/cache/%s/%s", serverIp, serverPort, cacheName, encodedKey);
   }
 
   @Override
@@ -96,6 +126,14 @@ public class BinaryCacheRestClient implements BinaryCacheClient {
   @Override
   public Result removeEntry(final String cacheName, final CacheKey cacheKey) {
     return null;
+  }
+
+  private String encodeKey(CacheKey cacheKey) {
+    final Gson gson = new GsonBuilder()
+        .registerTypeAdapter(CacheKey.class, adapter)
+        .create();
+    final String jsonString = gson.toJson(cacheKey, CacheKey.class);
+    return new String(Base64.getUrlEncoder().encode(jsonString.getBytes()));
   }
 
 
