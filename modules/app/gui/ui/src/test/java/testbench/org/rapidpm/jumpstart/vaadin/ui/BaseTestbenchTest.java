@@ -42,10 +42,10 @@ public class BaseTestbenchTest extends TestBenchTestCase {
 
   public static final String baseUrl = "http://localhost:" + MainUndertow.DEFAULT_SERVLET_PORT + MainUndertow.MYAPP;
   public static final String VAADIN_TESTBENCH_DRIVER_PROPERTY = "vaadin.testbench.driver";
-  public static final String DEAFAULT_WEB_DRIVER = "firefox";
   public static final String FIREFOX = "firefox";
   public static final String CHROME = "chrome";
   public static final String PHANTOMJS = "phantomjs";
+  public static final String DEAFAULT_WEB_DRIVER = CHROME;
   private RemoteWebDriver remoteWebDriver;
 
 

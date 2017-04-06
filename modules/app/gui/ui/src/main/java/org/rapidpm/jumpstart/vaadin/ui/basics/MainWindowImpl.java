@@ -38,10 +38,7 @@ public class MainWindowImpl extends VerticalLayout  implements MainWindow {
   @Inject
   public TopPanel topPanel;
 
-
   private ComponentContainer workingAreaContainer = new RapidPanel();
-
-
 
   @PostConstruct
   private void buildMainLayout() {

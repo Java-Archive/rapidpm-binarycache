@@ -26,7 +26,7 @@
   <parent>
     <groupId>org.rapidpm</groupId>
     <artifactId>rapidpm-dependencies</artifactId>
-    <version>3.3.0-SNAPSHOT</version>
+    <version>3.4.0</version>
   </parent>
 
   <groupId>org.rapidpm.microservice</groupId>
@@ -100,11 +100,11 @@
         <artifactId>binarycache-modules-app-gui-design</artifactId>
         <version>${project.version}</version>
       </dependency>
-      <dependency>
-        <groupId>org.rapidpm.microservice</groupId>
-        <artifactId>binarycache-modules-optionals-microservice</artifactId>
-        <version>${project.version}</version>
-      </dependency>
+      <!--<dependency>-->
+        <!--<groupId>org.rapidpm.microservice</groupId>-->
+        <!--<artifactId>binarycache-modules-optionals-microservice</artifactId>-->
+        <!--<version>${project.version}</version>-->
+      <!--</dependency>-->
       <dependency>
         <groupId>org.rapidpm.microservice</groupId>
         <artifactId>binarycache-modules-app-cache-api</artifactId>

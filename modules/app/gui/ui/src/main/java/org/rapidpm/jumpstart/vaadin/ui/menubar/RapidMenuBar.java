@@ -19,6 +19,7 @@
 
 package org.rapidpm.jumpstart.vaadin.ui.menubar;
 
+import com.vaadin.server.Page;
 import com.vaadin.ui.MenuBar;
 import com.vaadin.ui.UI;
 import org.rapidpm.ddi.DI;
@@ -46,7 +47,8 @@ public class RapidMenuBar extends MenuBar {
     addItem(propertyService.resolve("menue.default.main"), null, null)
         .addItem(propertyService.resolve("menue.default.main.logout"), menuItem -> {
           getSession().close();
-          UI.getCurrent().getPage().setLocation("/");
+          final Page page = UI.getCurrent().getPage();
+          page.setLocation("/");
         });
 //    addItem(propertyService.resolve("menue.default.chat"), menuItem -> MainWindow.getCurrent().setWorkingAreaContainer(DI.activateDI(new RapidChat())));
     addItem(propertyService.resolve("menue.default.help"), null, null)
