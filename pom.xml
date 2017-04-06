@@ -112,6 +112,16 @@
       </dependency>
       <dependency>
         <groupId>org.rapidpm.microservice</groupId>
+        <artifactId>binarycache-modules-app-cache-connect-rest</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.rapidpm.microservice</groupId>
+        <artifactId>binarycache-modules-app-cache-provider-hazelcast</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.rapidpm.microservice</groupId>
         <artifactId>binarycache-modules-app-cache-provider-ehcache</artifactId>
         <version>${project.version}</version>
       </dependency>
