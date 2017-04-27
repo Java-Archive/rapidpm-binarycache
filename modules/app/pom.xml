@@ -33,7 +33,7 @@
 
   <modules>
     <module>cache</module>
-    <!--<module>gui</module>-->
+    <module>gui</module>
   </modules>
 
 </project>

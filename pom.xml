@@ -112,26 +112,5 @@
     </plugins>
   </build>
 
-  <profiles>
-    <!-- make this work -->
-    <profile>
-      <id>binarycache-gui</id>
-      <activation>
-        <activeByDefault>true</activeByDefault>
-      </activation>
-      <modules>
-        <module>modules/app/gui/</module>
-      </modules>
-    </profile>
-    <profile>
-      <id>binarycache-client</id>
-      <activation>
-        <activeByDefault>true</activeByDefault>
-      </activation>
-      <modules>
-        <module>modules/client</module>
-      </modules>
-    </profile>
-  </profiles>
 
 </project>

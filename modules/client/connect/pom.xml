@@ -16,12 +16,10 @@
     <module>inmemory</module>
   </modules>
 
-  <dependencyManagement>
     <dependencies>
       <dependency>
         <groupId>org.rapidpm.binarycache</groupId>
         <artifactId>rapidpm-binarycache-modules-app-cache-api</artifactId>
       </dependency>
     </dependencies>
-  </dependencyManagement>
 </project>
