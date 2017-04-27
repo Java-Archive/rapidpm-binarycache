@@ -22,14 +22,13 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <parent>
-    <artifactId>binarycache-modules-app-gui</artifactId>
-    <groupId>org.rapidpm.microservice</groupId>
+    <groupId>org.rapidpm.binarycache</groupId>
+    <artifactId>rapidpm-binarycache-modules-app-gui</artifactId>
     <version>1.0.0-SNAPSHOT</version>
   </parent>
+
   <modelVersion>4.0.0</modelVersion>
-
-  <artifactId>binarycache-modules-app-gui-ui</artifactId>
-
+  <artifactId>rapidpm-binarycache-modules-app-gui-ui</artifactId>
 
   <properties>
     <phantomjs-maven-plugin.version>0.7</phantomjs-maven-plugin.version>
@@ -44,30 +43,23 @@
 
 
   <dependencies>
-
     <dependency>
-      <groupId>org.rapidpm.microservice</groupId>
-      <artifactId>binarycache-modules-app-gui-logic</artifactId>
+      <groupId>org.rapidpm.binarycache</groupId>
+      <artifactId>rapidpm-binarycache-modules-app-gui-design</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.rapidpm.binarycache</groupId>
+      <artifactId>rapidpm-binarycache-modules-app-gui-logic</artifactId>
     </dependency>
     <dependency>
       <groupId>org.rapidpm.microservice</groupId>
-      <artifactId>binarycache-modules-app-gui-design</artifactId>
+      <artifactId>jumpstart-vaadin-modules-optionals-microservice</artifactId>
     </dependency>
-    <dependency>
-      <groupId>org.rapidpm.microservice</groupId>
-      <artifactId>rapidpm-microservice-modules-core</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>org.rapidpm.microservice</groupId>
-      <artifactId>binarycache-modules-optionals-microservice</artifactId>
-    </dependency>
-
 
     <!-- Cache with  provider selected via profile -->
-
     <dependency>
-      <groupId>org.rapidpm.microservice</groupId>
-      <artifactId>binarycache-modules-app-cache-api</artifactId>
+      <groupId>org.rapidpm.binarycache</groupId>
+      <artifactId>rapidpm-binarycache-modules-app-cache-api</artifactId>
     </dependency>
 
     <!--added by Sven-->

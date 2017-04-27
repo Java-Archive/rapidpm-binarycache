@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <parent>
+    <groupId>org.rapidpm.binarycache</groupId>
+    <artifactId>rapidpm-binarycache</artifactId>
+    <version>1.0.0-SNAPSHOT</version>
+  </parent>
+
+  <artifactId>rapidpm-binarycache-bom</artifactId>
+  <packaging>pom</packaging>
+
+  <properties>
+    <rapidpm.version>0.8.1-SNAPSHOT</rapidpm.version>
+    <vaadin.version>8.0.5</vaadin.version>
+    <vaadin-testbench-api.version>5.0.0</vaadin-testbench-api.version>
+  </properties>
+
+
+  <dependencyManagement>
+    <dependencies>
+
+      <!-- https://mvnrepository.com/artifact/javax.cache/cache-api -->
+      <dependency>
+        <groupId>javax.cache</groupId>
+        <artifactId>cache-api</artifactId>
+        <version>1.0.0</version>
+      </dependency>
+
+      <dependency>
+        <groupId>org.rapidpm.binarycache</groupId>
+        <artifactId>rapidpm-binarycache-modules-app-gui-logic</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.rapidpm.binarycache</groupId>
+        <artifactId>rapidpm-binarycache-modules-app-gui-design</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.rapidpm.binarycache</groupId>
+        <artifactId>rapidpm-binarycache-modules-app-gui-ui</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.rapidpm.binarycache</groupId>
+        <artifactId>rapidpm-binarycache-modules-optionals-microservice</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.rapidpm.binarycache</groupId>
+        <artifactId>rapidpm-binarycache-modules-app-cache-api</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.rapidpm.binarycache</groupId>
+        <artifactId>rapidpm-binarycache-modules-app-cache-connect-rest</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.rapidpm.binarycache</groupId>
+        <artifactId>rapidpm-binarycache-modules-app-cache-provider-hazelcast</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.rapidpm.binarycache</groupId>
+        <artifactId>rapidpm-binarycache-modules-app-cache-provider-ehcache</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+
+      <!--Provider -->
+      <dependency>
+        <groupId>org.ehcache</groupId>
+        <artifactId>ehcache</artifactId>
+        <version>3.3.0</version>
+      </dependency>
+      <!-- Provider -->
+      <dependency>
+        <groupId>com.hazelcast</groupId>
+        <artifactId>hazelcast-all</artifactId>
+        <version>3.8.1</version>
+      </dependency>
+
+      <dependency>
+        <groupId>org.rapidpm.dynamic-cdi</groupId>
+        <artifactId>rapidpm-dynamic-cdi</artifactId>
+        <version>${rapidpm.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.rapidpm.dynamic-cdi</groupId>
+        <artifactId>rapidpm-dynamic-cdi-modules-core</artifactId>
+        <version>${rapidpm.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.rapidpm.microservice</groupId>
+        <artifactId>jumpstart-vaadin-modules-optionals-microservice</artifactId>
+        <version>0.7.0-SNAPSHOT</version>
+      </dependency>
+      <dependency>
+        <groupId>org.rapidpm.proxybuilder</groupId>
+        <artifactId>rapidpm-proxybuilder-modules-objectadapter-generator-processors</artifactId>
+        <version>${rapidpm.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.rapidpm.proxybuilder</groupId>
+        <artifactId>rapidpm-proxybuilder-modules-objectadapter-generator-annotations</artifactId>
+        <version>${rapidpm.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.rapidpm.microservice</groupId>
+        <artifactId>rapidpm-microservice-modules-core</artifactId>
+        <version>${rapidpm.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.rapidpm.microservice</groupId>
+        <artifactId>rapidpm-microservice-modules-core-testutils</artifactId>
+        <version>${rapidpm.version}</version>
+      </dependency>
+
+
+      <dependency>
+        <groupId>org.apache.commons</groupId>
+        <artifactId>commons-jcs-core</artifactId>
+        <version>2.1</version>
+      </dependency>
+      <dependency>
+        <groupId>org.jboss.resteasy</groupId>
+        <artifactId>resteasy-jaxrs</artifactId>
+        <version>3.1.2.Final</version>
+      </dependency>
+      <dependency>
+        <groupId>com.google.code.gson</groupId>
+        <artifactId>gson</artifactId>
+        <version>2.8.0</version>
+      </dependency>
+
+      <!--Vaadin Based stuff-->
+      <dependency>
+        <groupId>com.vaadin</groupId>
+        <artifactId>vaadin-server</artifactId>
+        <version>${vaadin.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>com.vaadin</groupId>
+        <artifactId>vaadin-themes</artifactId>
+        <version>${vaadin.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>com.vaadin</groupId>
+        <artifactId>vaadin-push</artifactId>
+        <version>${vaadin.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>com.vaadin</groupId>
+        <artifactId>vaadin-client</artifactId>
+        <version>${vaadin.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>com.vaadin</groupId>
+        <artifactId>vaadin-client-compiled</artifactId>
+        <version>${vaadin.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>com.vaadin</groupId>
+        <artifactId>vaadin-testbench</artifactId>
+        <version>${vaadin-testbench-api.version}</version>
+        <scope>test</scope>
+      </dependency>
+
+      <dependency>
+        <groupId>org.jboss.resteasy</groupId>
+        <artifactId>resteasy-multipart-provider</artifactId>
+        <version>3.1.1.Final</version>
+      </dependency>
+
+    </dependencies>
+  </dependencyManagement>
+
+</project>

@@ -17,24 +17,23 @@
   ~ specific language governing permissions and limitations
   ~ under the License.
   -->
-
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
-
   <parent>
     <groupId>org.rapidpm</groupId>
     <artifactId>rapidpm-dependencies</artifactId>
-    <version>3.3.0-SNAPSHOT</version>
+    <version>3.5.0-SNAPSHOT</version>
   </parent>
 
-  <groupId>org.rapidpm.microservice</groupId>
-  <artifactId>binarycache</artifactId>
+  <groupId>org.rapidpm.binarycache</groupId>
+  <artifactId>rapidpm-binarycache</artifactId>
   <packaging>pom</packaging>
   <version>1.0.0-SNAPSHOT</version>
 
   <modules>
+    <module>bom</module>
     <module>modules</module>
     <module>aggregate</module>
   </modules>
@@ -80,94 +79,10 @@
       <comments>A business-friendly OSS license</comments>
     </license>
   </licenses>
-  <dependencyManagement>
-    <dependencies>
 
-      <!-- https://mvnrepository.com/artifact/javax.cache/cache-api -->
-      <dependency>
-        <groupId>javax.cache</groupId>
-        <artifactId>cache-api</artifactId>
-        <version>1.0.0</version>
-      </dependency>
-
-      <dependency>
-        <groupId>org.rapidpm.microservice</groupId>
-        <artifactId>binarycache-modules-app-gui-logic</artifactId>
-        <version>${project.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>org.rapidpm.microservice</groupId>
-        <artifactId>binarycache-modules-app-gui-design</artifactId>
-        <version>${project.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>org.rapidpm.microservice</groupId>
-        <artifactId>binarycache-modules-optionals-microservice</artifactId>
-        <version>${project.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>org.rapidpm.microservice</groupId>
-        <artifactId>binarycache-modules-app-cache-api</artifactId>
-        <version>${project.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>org.rapidpm.microservice</groupId>
-        <artifactId>binarycache-modules-app-cache-connect-rest</artifactId>
-        <version>${project.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>org.rapidpm.microservice</groupId>
-        <artifactId>binarycache-modules-app-cache-provider-hazelcast</artifactId>
-        <version>${project.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>org.rapidpm.microservice</groupId>
-        <artifactId>binarycache-modules-app-cache-provider-ehcache</artifactId>
-        <version>${project.version}</version>
-      </dependency>
-
-      <!--Provider-->
-      <dependency>
-        <groupId>org.ehcache</groupId>
-        <artifactId>ehcache</artifactId>
-        <version>3.3.0</version>
-      </dependency>
-
-      <dependency>
-        <groupId>org.apache.commons</groupId>
-        <artifactId>commons-jcs-core</artifactId>
-        <version>2.1</version>
-      </dependency>
-
-      <!--Provider-->
-      <dependency>
-        <groupId>org.ehcache</groupId>
-        <artifactId>ehcache</artifactId>
-        <version>3.3.0</version>
-      </dependency>
-
-      <dependency>
-        <groupId>org.apache.commons</groupId>
-        <artifactId>commons-jcs-core</artifactId>
-        <version>2.1</version>
-      </dependency>
-
-      <!--Provider-->
-      <dependency>
-        <groupId>org.ehcache</groupId>
-        <artifactId>ehcache</artifactId>
-        <version>3.3.0</version>
-      </dependency>
-
-      <dependency>
-        <groupId>org.apache.commons</groupId>
-        <artifactId>commons-jcs-core</artifactId>
-        <version>2.1</version>
-      </dependency>
-
-
-    </dependencies>
-  </dependencyManagement>
+  <properties>
+    <rapidpm-binarycache.version>1.0.0</rapidpm-binarycache.version>
+  </properties>
 
 
   <build>

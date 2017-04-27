@@ -93,5 +93,10 @@ public class BinaryCacheRestClientTest001 {
     assertFalse(cachedElement.isPresent());
   }
 
+  @Test
+  public void test005() throws Exception {
+    final Result result = client.clearCache(CACHE_NAME);
+    assertEquals(Result.OK, result);
+  }
 }
 
