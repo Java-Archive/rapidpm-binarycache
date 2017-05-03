@@ -86,7 +86,16 @@ public class BinaryCacheRestClient implements BinaryCacheClient {
 
   @Override
   public Result cacheBinaryIfAbsent(final String cacheName, final CacheKey cacheKey, final CacheByteArray binary) {
-    return null;
+    final String encodedKey = encodeKey(cacheKey);
+    final String targetUrl = buildBaseUrl(cacheName) + "/ifabsent";
+    final Client client = ClientBuilder.newClient();
+
+    final Response response = client.target(targetUrl + "/" + encodedKey)
+        .request()
+        .put(Entity.entity(binary.byteArray, MediaType.APPLICATION_OCTET_STREAM));
+
+    client.close();
+    return response.getStatus() == Response.Status.OK.getStatusCode() ? Result.OK : Result.FAILED;
   }
 
   @Override
@@ -120,7 +129,16 @@ public class BinaryCacheRestClient implements BinaryCacheClient {
 
   @Override
   public Result removeEntry(final String cacheName, final CacheKey cacheKey) {
-    return null;
+    final String encodedKey = encodeKey(cacheKey);
+    final Client client = ClientBuilder.newClient();
+    final String targetUrl = buildBaseUrl(cacheName);
+
+    final Response response = client.target(targetUrl + "/" + encodedKey)
+        .request()
+        .delete();
+    client.close();
+
+    return response.getStatus() == Response.Status.OK.getStatusCode() ? Result.OK : Result.FAILED;
   }
 
   private String encodeKey(CacheKey cacheKey) {
