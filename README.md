@@ -46,7 +46,8 @@ Add the following dependency to use it in your project.
 From the website [ehcache.org](http://www.ehcache.org/):  
 *"Ehcache is an open source, standards-based cache that boosts performance, offloads your database, and simplifies scalability. It's the most widely-used Java-based cache because it's robust, proven, full-featured, and integrates with other popular libraries and frameworks. Ehcache scales from in-process caching, all the way to mixed in-process/out-of-process deployments with terabyte-sized caches."*
   
-You'll find a default configuration XML in the resource folder config. To use a different configuration file set path to this file with the property **binarcache.config**.
+You'll find a default configuration XML in the resource folder config. To use a different configuration file set path to this file with the property **binarcache.config**. [Link]((http://www.ehcache.org/documentation/3.0/xml.html)) to the documentation about configuration files.
+
 
 ### Hazelcast
 The implementation of the JSR 107 (JCache) from Hazelcast offers a distribution of the cache content other several instances, based on Hazelcast's own in-mmeory data grid solution. See [Hazelcast Cache](https://hazelcast.com/use-cases/caching/jcache-provider/) for more information.

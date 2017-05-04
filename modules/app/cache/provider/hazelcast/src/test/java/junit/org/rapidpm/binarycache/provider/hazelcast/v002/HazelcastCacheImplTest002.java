@@ -30,13 +30,13 @@ import static org.junit.Assert.assertTrue;
  * <p>
  * Created by m.lang - RapidPM - Team on 30.03.2017.
  */
-public class HazlecastCacheImplTest002 {
+public class HazelcastCacheImplTest002 {
 
   private static final String CACHE_NAME = "default";
   @Inject
-  BinaryCacheClient client01;
+  private BinaryCacheClient client01;
   @Inject
-  BinaryCacheClient client02;
+  private BinaryCacheClient client02;
 
   @Before
   public void setUp() throws Exception {
