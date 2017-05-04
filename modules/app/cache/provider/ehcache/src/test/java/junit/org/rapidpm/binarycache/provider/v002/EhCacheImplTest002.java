@@ -1,4 +1,4 @@
-package junit.org.rapidpm.binarycache.provider;
+package junit.org.rapidpm.binarycache.provider.v002;
 
 import org.junit.After;
 import org.junit.Before;
@@ -30,7 +30,7 @@ import static org.junit.Assert.*;
  * <p>
  * Created by RapidPM - Team on 09.03.2017.
  */
-public class EhCacheImplTest {
+public class EhCacheImplTest002 {
 
   public static final String TEST_CACHE = "default";
 

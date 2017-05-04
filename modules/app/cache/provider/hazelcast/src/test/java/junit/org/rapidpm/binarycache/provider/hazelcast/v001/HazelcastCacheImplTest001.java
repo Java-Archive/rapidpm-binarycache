@@ -1,5 +1,6 @@
 package junit.org.rapidpm.binarycache.provider.hazelcast.v001;
 
+import com.hazelcast.cache.CacheNotExistsException;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -72,5 +73,15 @@ public class HazelcastCacheImplTest001 {
 
     final Optional<CacheByteArray> removedElement = cacheClient.getCachedElement(CACHE_NAME, key);
     assertFalse(removedElement.isPresent());
+  }
+
+  @Test(expected = CacheNotExistsException.class)
+  public void test003() throws Exception {
+    final Cache<CacheKey, CacheByteArray> cache = cacheClient.getCache("notThere");
+  }
+
+  @Test(expected = UnsupportedOperationException.class)
+  public void test004() throws Exception {
+    cacheClient.createCache("newCache");
   }
 }

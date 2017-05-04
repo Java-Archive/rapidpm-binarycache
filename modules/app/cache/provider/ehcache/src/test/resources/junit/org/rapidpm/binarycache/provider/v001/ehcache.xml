@@ -1,0 +1,17 @@
+<ehcache:config
+    xmlns:ehcache="http://www.ehcache.org/v3"
+    xmlns:jcache="http://www.ehcache.org/v3/jsr107">
+
+  <ehcache:cache alias="myCache" uses-template="defaultTemplate"/>
+
+  <ehcache:cache-template name="defaultTemplate">
+    <ehcache:key-type>org.rapidpm.binarycache.api.CacheKey</ehcache:key-type>
+    <ehcache:value-type>org.rapidpm.binarycache.api.CacheByteArray</ehcache:value-type>
+    <ehcache:expiry>
+      <ehcache:tti unit="hours">10</ehcache:tti>
+    </ehcache:expiry>
+    <ehcache:heap unit="entries">100</ehcache:heap>
+  </ehcache:cache-template>
+
+
+</ehcache:config>

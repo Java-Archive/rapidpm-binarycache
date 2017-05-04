@@ -34,6 +34,7 @@ public class HazelcastCacheImpl implements BinaryCacheClient {
 
   @PostConstruct
   public void init() throws FileNotFoundException {
+    // TODO set this through property, otherwise use classpathconfig
     final File file = new File(getClass().getResource(CONFIG_FILENAME).getFile());
     final Config config = new FileSystemXmlConfig(file);
     instance = Hazelcast.newHazelcastInstance(config);
@@ -42,5 +43,10 @@ public class HazelcastCacheImpl implements BinaryCacheClient {
   @Override
   public Cache<CacheKey, CacheByteArray> getCache(String cacheName) {
     return instance.getCacheManager().getCache(cacheName);
+  }
+
+  @Override
+  public Cache<CacheKey, CacheByteArray> createCache(String cacheName) {
+    throw new UnsupportedOperationException();
   }
 }
