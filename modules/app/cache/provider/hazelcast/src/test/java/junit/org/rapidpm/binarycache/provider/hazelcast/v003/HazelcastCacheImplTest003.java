@@ -28,7 +28,7 @@ import static org.junit.Assert.assertNotNull;
  * <p>
  * Created by m.lang - RapidPM - Team on 30.03.2017.
  */
-public class HazlecastCacheImplTest003 {
+public class HazelcastCacheImplTest003 {
 
   private HazelcastCacheImpl client;
 
@@ -56,7 +56,7 @@ public class HazlecastCacheImplTest003 {
 
   @Test
   public void test002() throws Exception {
-    final String path = HazlecastCacheImplTest003.class.getResource("hazelcast.xml").getPath();
+    final String path = HazelcastCacheImplTest003.class.getResource("hazelcast.xml").getPath();
     System.setProperty(HazelcastCacheImpl.CACHE_CONFIG_PROPERTY, path);
 
     DI.activateDI(this);
