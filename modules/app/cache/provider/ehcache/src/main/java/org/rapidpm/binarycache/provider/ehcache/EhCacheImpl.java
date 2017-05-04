@@ -9,6 +9,9 @@ import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 import javax.cache.Cache;
 import javax.cache.Caching;
+import javax.cache.configuration.MutableConfiguration;
+import javax.cache.expiry.AccessedExpiryPolicy;
+import javax.cache.expiry.Duration;
 import javax.cache.spi.CachingProvider;
 import java.net.URISyntaxException;
 
@@ -46,6 +49,17 @@ public class EhCacheImpl implements BinaryCacheClient {
   }
 
   @Override
+  public Cache<CacheKey, CacheByteArray> createCache(String cacheName) {
+    MutableConfiguration<CacheKey, CacheByteArray> config
+        = new MutableConfiguration<CacheKey, CacheByteArray>()
+        .setTypes(CacheKey.class, CacheByteArray.class)
+        .setExpiryPolicyFactory(
+            AccessedExpiryPolicy.factoryOf(Duration.ONE_HOUR))
+        .setStatisticsEnabled(true);
+    return cacheManager.createCache(cacheName, config);
+  }
+
+  @Override
   public Cache<CacheKey, CacheByteArray> getCache(String cacheName) {
     return cacheManager.getCache(cacheName, CacheKey.class, CacheByteArray.class);
   }
@@ -54,7 +68,5 @@ public class EhCacheImpl implements BinaryCacheClient {
   public Result removeEntry(String cacheName, CacheKey cacheKey) {
     return cacheManager.getCache(cacheName, CacheKey.class, CacheByteArray.class).remove(cacheKey) ? Result.OK : Result.FAILED;
   }
-
-
 
 }

@@ -12,7 +12,6 @@
   <artifactId>rapidpm-binarycache-modules-client-connect-inmemory</artifactId>
 
   <dependencies>
-    <!-- temporary! provider is chosen by maven profile -->
     <dependency>
       <groupId>org.rapidpm.binarycache</groupId>
       <artifactId>rapidpm-binarycache-modules-app-cache-provider-ehcache</artifactId>
