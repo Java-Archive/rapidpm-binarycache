@@ -1,11 +1,13 @@
 package junit.org.rapidpm.binarycache.provider.hazelcast.v002;
 
+import com.hazelcast.core.Hazelcast;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.rapidpm.binarycache.api.BinaryCacheClient;
 import org.rapidpm.binarycache.api.CacheByteArray;
 import org.rapidpm.binarycache.api.defaultkey.DefaultCacheKey;
+import org.rapidpm.binarycache.provider.hazelcast.HazelcastCacheImpl;
 import org.rapidpm.ddi.DI;
 
 import javax.inject.Inject;
@@ -30,7 +32,7 @@ import static org.junit.Assert.assertTrue;
  */
 public class HazlecastCacheImplTest002 {
 
-  public static final String CACHE_NAME = "default";
+  private static final String CACHE_NAME = "default";
   @Inject
   BinaryCacheClient client01;
   @Inject
@@ -45,6 +47,8 @@ public class HazlecastCacheImplTest002 {
 
   @After
   public void tearDown() throws Exception {
+    Hazelcast.getHazelcastInstanceByName(((HazelcastCacheImpl) client01).getInstanceName()).shutdown();
+    Hazelcast.getHazelcastInstanceByName(((HazelcastCacheImpl) client02).getInstanceName()).shutdown();
     DI.clearReflectionModel();
   }
 

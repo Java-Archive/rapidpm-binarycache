@@ -1,19 +1,18 @@
-package junit.org.rapidpm.binarycache.provider.v001;
+package junit.org.rapidpm.binarycache.provider.hazelcast.v003;
 
+import com.hazelcast.cache.CacheNotExistsException;
+import com.hazelcast.core.Hazelcast;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import org.rapidpm.binarycache.api.BinaryCacheClient;
 import org.rapidpm.binarycache.api.CacheByteArray;
 import org.rapidpm.binarycache.api.CacheKey;
-import org.rapidpm.binarycache.provider.ehcache.EhCacheImpl;
+import org.rapidpm.binarycache.provider.hazelcast.HazelcastCacheImpl;
 import org.rapidpm.ddi.DI;
 
 import javax.cache.Cache;
-import javax.inject.Inject;
 
 import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
 
 /**
  * Copyright (C) 2010 RapidPM
@@ -27,12 +26,11 @@ import static org.junit.Assert.assertNull;
  * See the License for the specific language governing permissions and
  * limitations under the License.
  * <p>
- * Created by m.lang - RapidPM - Team on 04.05.2017.
+ * Created by m.lang - RapidPM - Team on 30.03.2017.
  */
-public class EhCacheImplTest001 {
+public class HazlecastCacheImplTest003 {
 
-  @Inject
-  BinaryCacheClient cacheClient;
+  private HazelcastCacheImpl client;
 
   @Before
   public void setUp() throws Exception {
@@ -42,28 +40,29 @@ public class EhCacheImplTest001 {
 
   @After
   public void tearDown() throws Exception {
+    Hazelcast.getHazelcastInstanceByName(client.getInstanceName()).shutdown();
     DI.clearReflectionModel();
-    System.clearProperty(EhCacheImpl.CACHE_CONFIG_PROPERTY);
+    System.clearProperty(HazelcastCacheImpl.CACHE_CONFIG_PROPERTY);
   }
 
-  @Test
+  @Test(expected = CacheNotExistsException.class)
   public void test001() throws Exception {
     DI.activateDI(this);
-    final Cache<CacheKey, CacheByteArray> cache01 = cacheClient.getCache("default");
+    client = DI.activateDI(HazelcastCacheImpl.class);
+    final Cache<CacheKey, CacheByteArray> cache01 = client.getCache("default");
     assertNotNull(cache01);
-    final Cache<CacheKey, CacheByteArray> cache02 = cacheClient.getCache("notThere");
-    assertNull(cache02);
+    final Cache<CacheKey, CacheByteArray> cache02 = client.getCache("myCache");
   }
 
   @Test
   public void test002() throws Exception {
-    final String path = EhCacheImplTest001.class.getResource("ehcache.xml").getPath();
-    System.setProperty(EhCacheImpl.CACHE_CONFIG_PROPERTY, path);
-    DI.activateDI(this);
-    final Cache<CacheKey, CacheByteArray> cache01 = cacheClient.getCache("default");
-    assertNull(cache01);
-    final Cache<CacheKey, CacheByteArray> cache02 = cacheClient.getCache("myCache");
-    assertNotNull(cache02);
+    final String path = HazlecastCacheImplTest003.class.getResource("hazelcast.xml").getPath();
+    System.setProperty(HazelcastCacheImpl.CACHE_CONFIG_PROPERTY, path);
 
+    DI.activateDI(this);
+    client = DI.activateDI(HazelcastCacheImpl.class);
+
+    final Cache<CacheKey, CacheByteArray> cache01 = client.getCache("myCache");
+    assertNotNull(cache01);
   }
 }

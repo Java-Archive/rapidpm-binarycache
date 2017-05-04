@@ -1,5 +1,6 @@
 package org.rapidpm.binarycache.provider.hazelcast;
 
+import com.hazelcast.config.ClasspathXmlConfig;
 import com.hazelcast.config.Config;
 import com.hazelcast.config.FileSystemXmlConfig;
 import com.hazelcast.core.Hazelcast;
@@ -29,15 +30,26 @@ import java.io.FileNotFoundException;
  */
 public class HazelcastCacheImpl implements BinaryCacheClient {
 
-  public static final String CONFIG_FILENAME = "/config/hazelcast.xml";
+  public static final String CACHE_CONFIG_PROPERTY = "binarycache.config";
+  private static final String CONFIG_FILENAME = "org/rapidpm/binarycache/provider/hazelcast/hazelcast.xml";
   private HazelcastInstance instance;
 
   @PostConstruct
   public void init() throws FileNotFoundException {
-    // TODO set this through property, otherwise use classpathconfig
-    final File file = new File(getClass().getResource(CONFIG_FILENAME).getFile());
-    final Config config = new FileSystemXmlConfig(file);
+    final Config config = getConfig();
     instance = Hazelcast.newHazelcastInstance(config);
+  }
+
+  private Config getConfig() throws FileNotFoundException {
+    final String property = System.getProperty(CACHE_CONFIG_PROPERTY);
+    Config config;
+    if (property != null && !property.isEmpty()) {
+      final File file = new File(property);
+      config = new FileSystemXmlConfig(file);
+    } else {
+      config = new ClasspathXmlConfig(CONFIG_FILENAME);
+    }
+    return config;
   }
 
   @Override
@@ -49,4 +61,9 @@ public class HazelcastCacheImpl implements BinaryCacheClient {
   public Cache<CacheKey, CacheByteArray> createCache(String cacheName) {
     throw new UnsupportedOperationException();
   }
+
+  public String getInstanceName() {
+    return instance.getName();
+  }
+
 }

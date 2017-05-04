@@ -44,7 +44,7 @@ public class EhCacheImplTest002 {
     DI.clearReflectionModel();
     DI.activatePackages("org.rapidpm");
     DI.activateDI(this);
-    cacheByteArray = new CacheByteArray(new String("123").getBytes());
+    cacheByteArray = new CacheByteArray("123".getBytes());
   }
 
   @After

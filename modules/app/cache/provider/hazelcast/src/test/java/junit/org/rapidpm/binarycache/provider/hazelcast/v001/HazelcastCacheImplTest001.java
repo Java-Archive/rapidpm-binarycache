@@ -1,19 +1,18 @@
 package junit.org.rapidpm.binarycache.provider.hazelcast.v001;
 
 import com.hazelcast.cache.CacheNotExistsException;
+import com.hazelcast.core.Hazelcast;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import org.rapidpm.binarycache.api.BinaryCacheClient;
 import org.rapidpm.binarycache.api.CacheByteArray;
 import org.rapidpm.binarycache.api.CacheKey;
 import org.rapidpm.binarycache.api.Result;
 import org.rapidpm.binarycache.api.defaultkey.DefaultCacheKey;
+import org.rapidpm.binarycache.provider.hazelcast.HazelcastCacheImpl;
 import org.rapidpm.ddi.DI;
 
 import javax.cache.Cache;
-import javax.inject.Inject;
-
 import java.util.Optional;
 
 import static org.junit.Assert.*;
@@ -34,25 +33,25 @@ import static org.junit.Assert.*;
  */
 public class HazelcastCacheImplTest001 {
 
-  public static final String CACHE_NAME = "default";
-  @Inject
-  BinaryCacheClient cacheClient;
+  private static final String CACHE_NAME = "default";
+  private HazelcastCacheImpl client;
 
   @Before
   public void setUp() throws Exception {
     DI.clearReflectionModel();
     DI.activatePackages("org.rapidpm");
-    DI.activateDI(this);
+    client = DI.activateDI(HazelcastCacheImpl.class);
   }
 
   @After
   public void tearDown() throws Exception {
+    Hazelcast.getHazelcastInstanceByName(client.getInstanceName()).shutdown();
     DI.clearReflectionModel();
   }
 
   @Test
   public void test001() throws Exception {
-    final Cache<CacheKey, CacheByteArray> cache = cacheClient.getCache("default");
+    final Cache<CacheKey, CacheByteArray> cache = client.getCache("default");
     assertNotNull(cache);
   }
 
@@ -61,27 +60,27 @@ public class HazelcastCacheImplTest001 {
     final DefaultCacheKey key = new DefaultCacheKey("002");
     final CacheByteArray value = new CacheByteArray("test".getBytes());
 
-    final Result cacheBinary = cacheClient.cacheBinary(CACHE_NAME, key, value);
+    final Result cacheBinary = client.cacheBinary(CACHE_NAME, key, value);
     assertEquals(Result.OK, cacheBinary);
 
-    final Optional<CacheByteArray> cachedElement = cacheClient.getCachedElement(CACHE_NAME, key);
+    final Optional<CacheByteArray> cachedElement = client.getCachedElement(CACHE_NAME, key);
     assertTrue(cachedElement.isPresent());
     assertEquals("test", new String(cachedElement.get().byteArray));
 
-    final Result removeEntry = cacheClient.removeEntry(CACHE_NAME, key);
+    final Result removeEntry = client.removeEntry(CACHE_NAME, key);
     assertEquals(Result.OK, removeEntry);
 
-    final Optional<CacheByteArray> removedElement = cacheClient.getCachedElement(CACHE_NAME, key);
+    final Optional<CacheByteArray> removedElement = client.getCachedElement(CACHE_NAME, key);
     assertFalse(removedElement.isPresent());
   }
 
   @Test(expected = CacheNotExistsException.class)
   public void test003() throws Exception {
-    final Cache<CacheKey, CacheByteArray> cache = cacheClient.getCache("notThere");
+    final Cache<CacheKey, CacheByteArray> cache = client.getCache("notThere");
   }
 
   @Test(expected = UnsupportedOperationException.class)
   public void test004() throws Exception {
-    cacheClient.createCache("newCache");
+    client.createCache("newCache");
   }
 }
