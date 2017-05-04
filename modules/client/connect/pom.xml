@@ -3,25 +3,23 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <parent>
-    <artifactId>binarycache-modules-client</artifactId>
-    <groupId>org.rapidpm.microservice</groupId>
+    <groupId>org.rapidpm.binarycache</groupId>
+    <artifactId>rapidpm-binarycache-modules-client</artifactId>
     <version>1.0.0-SNAPSHOT</version>
   </parent>
   <modelVersion>4.0.0</modelVersion>
-
-  <artifactId>binarycache-modules-client-connect</artifactId>
+  <artifactId>rapidpm-binarycache-modules-client-connect</artifactId>
   <packaging>pom</packaging>
+
   <modules>
     <module>rest</module>
     <module>inmemory</module>
   </modules>
 
-
-  <dependencies>
-    <dependency>
-      <groupId>org.rapidpm.microservice</groupId>
-      <artifactId>binarycache-modules-app-cache-api</artifactId>
-    </dependency>
-  </dependencies>
-
+    <dependencies>
+      <dependency>
+        <groupId>org.rapidpm.binarycache</groupId>
+        <artifactId>rapidpm-binarycache-modules-app-cache-api</artifactId>
+      </dependency>
+    </dependencies>
 </project>

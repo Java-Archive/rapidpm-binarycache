@@ -87,10 +87,62 @@ public class BinaryCacheRestClientTest001 {
 
   @Test
   public void test004() throws Exception {
+    final DefaultCacheKey key = new DefaultCacheKey("123");
+    final CacheByteArray value = new CacheByteArray("123".getBytes());
+    client.cacheBinaryIfAbsent(CACHE_NAME, key, value);
+    client.cacheBinaryIfAbsent(CACHE_NAME, key, value);
+
+    final Optional<CacheByteArray> cachedElement = client.getCachedElement(CACHE_NAME, key);
+    assertTrue(cachedElement.isPresent());
+    assertEquals(new String(value.byteArray), new String(cachedElement.get().byteArray));
+  }
+
+  @Test
+  public void test005() throws Exception {
     final DefaultCacheKey key = new DefaultCacheKey("notThere");
 
     final Optional<CacheByteArray> cachedElement = client.getCachedElement(CACHE_NAME, key);
     assertFalse(cachedElement.isPresent());
+  }
+
+  @Test
+  public void test006() throws Exception {
+    final Result result = client.clearCache(CACHE_NAME);
+    assertEquals(Result.OK, result);
+  }
+
+  @Test
+  public void test007() throws Exception {
+    final DefaultCacheKey key = new DefaultCacheKey("123");
+    final CacheByteArray value = new CacheByteArray("123".getBytes());
+    client.cacheBinary(CACHE_NAME, key, value);
+
+    final Optional<CacheByteArray> element01 = client.getCachedElement(CACHE_NAME, key);
+    assertTrue(element01.isPresent());
+    assertEquals(new String(value.byteArray), new String(element01.get().byteArray));
+
+    final Result result = client.removeEntry(CACHE_NAME, key);
+    assertEquals(Result.OK, result);
+
+    final Optional<CacheByteArray> element02 = client.getCachedElement(CACHE_NAME, key);
+    assertFalse(element02.isPresent());
+  }
+
+  @Test
+  public void test008() throws Exception {
+    final DefaultCacheKey key01 = new DefaultCacheKey("123");
+    final CacheByteArray value01 = new CacheByteArray("123".getBytes());
+    client.cacheBinary(CACHE_NAME, key01, value01);
+
+    final DefaultCacheKey key02 = new DefaultCacheKey("456");
+    final CacheByteArray value02 = new CacheByteArray("456".getBytes());
+    client.cacheBinary(CACHE_NAME, key02, value02);
+
+    final Result result = client.removeEntry(CACHE_NAME, key02);
+    assertEquals(Result.OK, result);
+
+    final Optional<CacheByteArray> element = client.getCachedElement(CACHE_NAME, key01);
+    assertTrue(element.isPresent());
   }
 
 }

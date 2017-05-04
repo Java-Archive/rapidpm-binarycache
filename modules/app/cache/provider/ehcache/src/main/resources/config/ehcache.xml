@@ -2,12 +2,6 @@
     xmlns:ehcache="http://www.ehcache.org/v3"
     xmlns:jcache="http://www.ehcache.org/v3/jsr107">
 
-<!--  <ehcache:service>
-    <jcache:defaults>
-      <jcache:cache name="default" template="defaultTemplate"/>
-    </jcache:defaults>
-  </ehcache:service>-->
-
   <ehcache:cache alias="default" uses-template="defaultTemplate"/>
 
   <ehcache:cache-template name="defaultTemplate">
@@ -19,47 +13,5 @@
     <ehcache:heap unit="entries">200</ehcache:heap>
   </ehcache:cache-template>
 
-  <!--
-    <ehcache:cache alias="default">
-      <ehcache:key-type>org.rapidpm.binarycache.api.CacheKey</ehcache:key-type>
-      <ehcache:value-type>[Ljava.lang.Byte;</ehcache:value-type>
-      <ehcache:expiry>
-        <ehcache:tti unit="minutes">30</ehcache:tti>
-      </ehcache:expiry>
-      <ehcache:heap unit="entries">200</ehcache:heap>
-    </ehcache:cache>
-  -->
-
-  <!--
-    OPTIONAL
-      A <cache-template> defines a named template that can be used be <cache> definitions in this same file
-      They have all the same property as the <cache> elements above
-  -->
-
-
-
-
-
-
-<!--
-
-  &lt;!&ndash;
-    A <cache> that uses the template above by referencing the cache-template's name in the uses-template attribute:
-  &ndash;&gt;
-  <ehcache:cache alias="default">
-    &lt;!&ndash;
-      Adds the key and value type configuration
-    &ndash;&gt;
-    <ehcache:key-type>org.rapidpm.binarycache.api.CacheKey</ehcache:key-type>
-    <ehcache:value-type>[Ljava.lang.Byte;</ehcache:value-type>
-    <ehcache:expiry>
-      <ehcache:tti unit="seconds">3600</ehcache:tti>
-    </ehcache:expiry>
-    &lt;!&ndash;
-      Overwrites the capacity limit set by the template to a new value
-    &ndash;&gt;
-    <ehcache:heap unit="entries">200</ehcache:heap>
-
-  </ehcache:cache>-->
 
 </ehcache:config>

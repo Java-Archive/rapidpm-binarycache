@@ -3,21 +3,14 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <parent>
-    <artifactId>binarycache</artifactId>
-    <groupId>org.rapidpm.microservice</groupId>
+    <groupId>org.rapidpm.binarycache</groupId>
+    <artifactId>rapidpm-binarycache</artifactId>
     <version>1.0.0-SNAPSHOT</version>
   </parent>
   <modelVersion>4.0.0</modelVersion>
   <name>cache-${provider}-${connect}</name>
 
-  <artifactId>binarycache-aggregate</artifactId>
-
-  <dependencies>
-    <dependency>
-      <groupId>org.rapidpm.microservice</groupId>
-      <artifactId>rapidpm-microservice-modules-core</artifactId>
-    </dependency>
-  </dependencies>
+  <artifactId>rapidpm-binarycache-aggregate</artifactId>
 
   <build>
     <finalName>cache-${provider}-${connect}-${project.version}</finalName>
@@ -88,8 +81,8 @@
       </properties>
       <dependencies>
         <dependency>
-          <groupId>org.rapidpm.microservice</groupId>
-          <artifactId>binarycache-modules-app-cache-connect-rest</artifactId>
+          <groupId>org.rapidpm.binarycache</groupId>
+          <artifactId>rapidpm-binarycache-modules-app-cache-connect-rest</artifactId>
           <version>${project.version}</version>
         </dependency>
       </dependencies>
@@ -104,8 +97,8 @@
       </properties>
       <dependencies>
         <dependency>
-          <groupId>org.rapidpm.microservice</groupId>
-          <artifactId>binarycache-modules-client-connect-inmemory</artifactId>
+          <groupId>org.rapidpm.binarycache</groupId>
+          <artifactId>rapidpm-binarycache-modules-client-connect-inmemory</artifactId>
           <version>${project.version}</version>
         </dependency>
       </dependencies>
@@ -120,8 +113,8 @@
       </properties>
       <dependencies>
         <dependency>
-          <groupId>org.rapidpm.microservice</groupId>
-          <artifactId>binarycache-modules-app-cache-provider-ehcache</artifactId>
+          <groupId>org.rapidpm.binarycache</groupId>
+          <artifactId>rapidpm-binarycache-modules-app-cache-provider-ehcache</artifactId>
           <version>${project.version}</version>
         </dependency>
       </dependencies>
@@ -136,8 +129,8 @@
       </properties>
       <dependencies>
         <dependency>
-          <groupId>org.rapidpm.microservice</groupId>
-          <artifactId>binarycache-modules-app-cache-provider-hazelcast</artifactId>
+          <groupId>org.rapidpm.binarycache</groupId>
+          <artifactId>rapidpm-binarycache-modules-app-cache-provider-hazelcast</artifactId>
           <version>${project.version}</version>
         </dependency>
       </dependencies>

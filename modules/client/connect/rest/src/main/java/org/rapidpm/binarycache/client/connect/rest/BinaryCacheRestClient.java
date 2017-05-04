@@ -73,19 +73,29 @@ public class BinaryCacheRestClient implements BinaryCacheClient {
   @Override
   public Result cacheBinary(final String cacheName, final CacheKey cacheKey, final CacheByteArray binary) {
     final String encodedKey = encodeKey(cacheKey);
-    final String targetUrl = buildTargetUrl(cacheName, encodedKey);
+    final String targetUrl = buildBaseUrl(cacheName);
     final Client client = ClientBuilder.newClient();
 
-    final Response response = client.target(targetUrl)
+    final Response response = client.target(targetUrl + "/" + encodedKey)
         .request()
         .put(Entity.entity(binary.byteArray, MediaType.APPLICATION_OCTET_STREAM));
 
+    client.close();
     return response.getStatus() == Response.Status.OK.getStatusCode() ? Result.OK : Result.FAILED;
   }
 
   @Override
   public Result cacheBinaryIfAbsent(final String cacheName, final CacheKey cacheKey, final CacheByteArray binary) {
-    return null;
+    final String encodedKey = encodeKey(cacheKey);
+    final String targetUrl = buildBaseUrl(cacheName) + "/ifabsent";
+    final Client client = ClientBuilder.newClient();
+
+    final Response response = client.target(targetUrl + "/" + encodedKey)
+        .request()
+        .put(Entity.entity(binary.byteArray, MediaType.APPLICATION_OCTET_STREAM));
+
+    client.close();
+    return response.getStatus() == Response.Status.OK.getStatusCode() ? Result.OK : Result.FAILED;
   }
 
   @Override
@@ -93,39 +103,42 @@ public class BinaryCacheRestClient implements BinaryCacheClient {
     final String encodedKey = encodeKey(cacheKey);
     final Client client = ClientBuilder.newClient();
 
-    final String targetUrl = buildTargetUrl(cacheName, encodedKey);
-    final Response response = client.target(targetUrl)
+    final String targetUrl = buildBaseUrl(cacheName);
+
+    final Response response = client.target(targetUrl + "/" + encodedKey)
         .request()
         .get();
     final byte[] bytes = response.readEntity(byte[].class);
-    if (bytes.length > 0)
-      return Optional.of(new CacheByteArray(bytes));
-    else
-      return Optional.empty();
-  }
 
-  private String buildTargetUrl(String cacheName, String encodedKey) {
-    return String.format("http://%s:%s/rest/cache/%s/%s", serverIp, serverPort, cacheName, encodedKey);
+    client.close();
+    return bytes.length > 0 ? Optional.of(new CacheByteArray(bytes)) : Optional.empty();
   }
 
   @Override
   public Result clearCache(final String cacheName) {
-    Client client = ClientBuilder.newClient();
+    final Client client = ClientBuilder.newClient();
+    final String targetUrl = buildBaseUrl(cacheName);
 
-    final String generateBasicReqURL = "http://" + serverIp + ":" + serverPort + "/" + "rest" + "/" + "REST-APP" + "/" + "params";
-    String val = client
-        .target(generateBasicReqURL)
+    final Response response = client.target(targetUrl)
         .request()
-        .get(String.class);
+        .delete();
     client.close();
 
-    //may check something...
-    return Result.OK;
+    return response.getStatus() == Response.Status.OK.getStatusCode() ? Result.OK : Result.FAILED;
   }
 
   @Override
   public Result removeEntry(final String cacheName, final CacheKey cacheKey) {
-    return null;
+    final String encodedKey = encodeKey(cacheKey);
+    final Client client = ClientBuilder.newClient();
+    final String targetUrl = buildBaseUrl(cacheName);
+
+    final Response response = client.target(targetUrl + "/" + encodedKey)
+        .request()
+        .delete();
+    client.close();
+
+    return response.getStatus() == Response.Status.OK.getStatusCode() ? Result.OK : Result.FAILED;
   }
 
   private String encodeKey(CacheKey cacheKey) {
@@ -134,6 +147,10 @@ public class BinaryCacheRestClient implements BinaryCacheClient {
         .create();
     final String jsonString = gson.toJson(cacheKey, CacheKey.class);
     return new String(Base64.getUrlEncoder().encode(jsonString.getBytes()));
+  }
+
+  private String buildBaseUrl(String cacheName) {
+    return String.format("http://%s:%s/rest/cache/%s", serverIp, serverPort, cacheName);
   }
 
 
