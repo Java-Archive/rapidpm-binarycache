@@ -138,34 +138,6 @@
         <artifactId>commons-jcs-core</artifactId>
         <version>2.1</version>
       </dependency>
-
-      <!--Provider-->
-      <dependency>
-        <groupId>org.ehcache</groupId>
-        <artifactId>ehcache</artifactId>
-        <version>3.3.0</version>
-      </dependency>
-
-      <dependency>
-        <groupId>org.apache.commons</groupId>
-        <artifactId>commons-jcs-core</artifactId>
-        <version>2.1</version>
-      </dependency>
-
-      <!--Provider-->
-      <dependency>
-        <groupId>org.ehcache</groupId>
-        <artifactId>ehcache</artifactId>
-        <version>3.3.0</version>
-      </dependency>
-
-      <dependency>
-        <groupId>org.apache.commons</groupId>
-        <artifactId>commons-jcs-core</artifactId>
-        <version>2.1</version>
-      </dependency>
-
-
     </dependencies>
   </dependencyManagement>
 
