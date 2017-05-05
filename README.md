@@ -5,6 +5,9 @@
  - Different JCache implementations, e.g. EHCache or Hazelcast Cache
  - Inmemory interface for direct access to the cache functionality 
  - REST endpoints for access via http
+ 
+## JCache?
+Here's a very good article from Matti Tahvonen telling you more about the JSR 107: [JCache, why and how?](https://vaadin.com/blog/-/blogs/jcache-why-and-how-)
 
 ## Build your own cache
 This project comes with an so called **aggregate** module, enabling the configuration of the cache components 
