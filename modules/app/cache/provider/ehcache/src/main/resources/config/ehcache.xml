@@ -2,6 +2,7 @@
     xmlns:ehcache="http://www.ehcache.org/v3">
 
   <ehcache:cache alias="default" uses-template="defaultTemplate"/>
+  <ehcache:cache alias="myCache" uses-template="defaultTemplate"/>
 
   <ehcache:cache-template name="defaultTemplate">
     <ehcache:key-type>org.rapidpm.binarycache.api.CacheKey</ehcache:key-type>
@@ -10,6 +11,7 @@
       <!-- tti=time to idle; ttl=time to live; -->
       <ehcache:tti unit="hours">1</ehcache:tti>
     </ehcache:expiry>
+
     <ehcache:heap unit="entries">200</ehcache:heap>
   </ehcache:cache-template>
 

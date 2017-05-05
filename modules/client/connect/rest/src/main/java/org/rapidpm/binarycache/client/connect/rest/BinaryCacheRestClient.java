@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import org.rapidpm.binarycache.api.*;
 
+import javax.annotation.PostConstruct;
 import javax.cache.Cache;
 import javax.inject.Inject;
 import javax.ws.rs.client.Client;
@@ -31,39 +32,23 @@ import java.util.Optional;
  */
 public class BinaryCacheRestClient implements BinaryCacheClient {
 
-  @Inject
-  private CacheKeyAdapter adapter;
-
+  public static final String PROPERTY_IP = "binarycache.ip";
+  public static final String PROPERTY_PORT = "binarycache.port";
   public static final String DEFAULT_PORT = "8080";
   public static final String DEFAULT_IP = "127.0.0.1";
-  private final String serverIp;
-  private final String serverPort;
 
-  public BinaryCacheRestClient() {
-    serverIp = DEFAULT_IP;
-    serverPort = DEFAULT_PORT;
-  }
+  @Inject
+  private CacheKeyAdapter adapter;
+  private String serverIp;
+  private String serverPort;
 
-  public BinaryCacheRestClient(final String serverIp, final String serverPort) {
+  @PostConstruct
+  public void init() {
+    this.serverIp = System.getProperty(PROPERTY_IP, DEFAULT_IP);
+    this.serverPort = System.getProperty(PROPERTY_PORT, DEFAULT_PORT);
     if (Objects.isNull(serverIp)) throw new NullPointerException("serverIP is null");
     if (Objects.isNull(serverPort)) throw new NullPointerException("serverPort is null");
-    this.serverIp = serverIp;
-    this.serverPort = serverPort;
   }
-
-  public BinaryCacheRestClient(final int serverPort) {
-    this.serverIp = DEFAULT_IP;
-    this.serverPort = String.valueOf(serverPort);
-  }
-
-  public BinaryCacheRestClient(final String serverIp) {
-    if (Objects.isNull(serverIp)) throw new NullPointerException("serverIP is null");
-    this.serverIp = serverIp;
-    this.serverPort = DEFAULT_PORT;
-  }
-
-
-  //create REST request methods , delegate to binaryCacheClient
 
   @Override
   public Cache<CacheKey, CacheByteArray> getCache(final String cacheName) {
