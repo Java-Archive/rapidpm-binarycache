@@ -53,7 +53,7 @@ public class BinaryCacheInmemoryClientTest {
   }
 
   @Test
-  public void test003() throws Exception {
+  public void test002() throws Exception {
     final DefaultCacheKey key = new DefaultCacheKey("123");
     final byte[] value = "test".getBytes();
 
@@ -64,8 +64,8 @@ public class BinaryCacheInmemoryClientTest {
   }
 
   @Test
-  public void test004() throws Exception {
-    final String myCache = "myCache";
+  public void test003() throws Exception {
+    final String myCache = "myImageCache";
     client.createCache(myCache);
     final Cache<CacheKey, CacheByteArray> cache = client.getCache(myCache);
     assertNotNull(cache);
