@@ -14,7 +14,7 @@
   <packaging>pom</packaging>
 
   <properties>
-    <rapidpm.version>0.8.1-SNAPSHOT</rapidpm.version>
+    <rapidpm.version>0.8.1</rapidpm.version>
     <vaadin.version>8.0.5</vaadin.version>
     <vaadin-testbench-api.version>5.0.0</vaadin-testbench-api.version>
   </properties>
