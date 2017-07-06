@@ -34,6 +34,7 @@
   <modules>
     <module>app</module>
     <module>client</module>
+    <module>performance</module>
   </modules>
 
   <dependencyManagement>

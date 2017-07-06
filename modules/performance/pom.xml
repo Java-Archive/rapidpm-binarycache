@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <parent>
+    <groupId>org.rapidpm.binarycache</groupId>
+    <artifactId>rapidpm-binarycache-modules</artifactId>
+    <version>1.0.0-SNAPSHOT</version>
+  </parent>
+  <artifactId>rapidpm-binarycache-modules-performance</artifactId>
+
+  <properties>
+    <skipStressTest>true</skipStressTest>
+  </properties>
+
+  <dependencies>
+    <dependency>
+      <groupId>org.rapidpm.binarycache</groupId>
+      <artifactId>rapidpm-binarycache-modules-app-cache-provider-ehcache</artifactId>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.rapidpm.binarycache</groupId>
+      <artifactId>rapidpm-binarycache-modules-app-cache-connect-rest</artifactId>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>io.gatling.highcharts</groupId>
+      <artifactId>gatling-charts-highcharts</artifactId>
+      <scope>test</scope>
+    </dependency>
+  </dependencies>
+
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>io.gatling</groupId>
+        <artifactId>gatling-maven-plugin</artifactId>
+        <version>2.2.1</version>
+        <!-- optional if you only have one simulation -->
+        <configuration>
+          <runMultipleSimulations>true</runMultipleSimulations>
+        </configuration>
+        <executions>
+          <execution>
+            <id>Stress test</id>
+            <goals>
+              <goal>integration-test</goal>
+            </goals>
+            <configuration>
+              <skip>${skipStressTest}</skip>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
+  </build>
+
+  <profiles>
+    <profile>
+      <id>qm-qs-stresstest</id>
+      <activation>
+        <activeByDefault>false</activeByDefault>
+      </activation>
+      <properties>
+        <skipStressTest>false</skipStressTest>
+      </properties>
+    </profile>
+  </profiles>
+
+</project>
