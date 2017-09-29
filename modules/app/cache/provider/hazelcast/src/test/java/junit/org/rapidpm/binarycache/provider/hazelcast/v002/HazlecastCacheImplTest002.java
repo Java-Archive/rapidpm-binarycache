@@ -31,10 +31,8 @@ import static org.junit.Assert.assertTrue;
 public class HazlecastCacheImplTest002 {
 
   public static final String CACHE_NAME = "default";
-  @Inject
-  BinaryCacheClient client01;
-  @Inject
-  BinaryCacheClient client02;
+  @Inject private BinaryCacheClient client01;
+  @Inject private BinaryCacheClient client02;
 
   @Before
   public void setUp() throws Exception {

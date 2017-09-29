@@ -31,8 +31,7 @@ import static org.junit.Assert.assertNotNull;
  */
 public class DefaultCacheKeyAdapterTest002 {
 
-  @Inject
-  private CacheKeyAdapter adapter;
+  @Inject private CacheKeyAdapter adapter;
 
   @Before
   public void setUp() throws Exception {

@@ -1,5 +1,16 @@
 package junit.org.rapidpm.binarycache.provider;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
+
+import java.util.Optional;
+import java.util.UUID;
+
+import javax.cache.Cache;
+import javax.inject.Inject;
+
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -8,13 +19,6 @@ import org.rapidpm.binarycache.api.CacheKey;
 import org.rapidpm.binarycache.api.Result;
 import org.rapidpm.binarycache.provider.ehcache.EhCacheImpl;
 import org.rapidpm.ddi.DI;
-
-import javax.cache.Cache;
-import javax.inject.Inject;
-import java.util.Optional;
-import java.util.UUID;
-
-import static org.junit.Assert.*;
 
 /**
  * Copyright (C) 2010 RapidPM
@@ -34,8 +38,7 @@ public class EhCacheImplTest {
 
   public static final String TEST_CACHE = "default";
 
-  @Inject
-  private EhCacheImpl cacheClient;
+  @Inject private EhCacheImpl cacheClient;
 
   private CacheByteArray cacheByteArray;
 
@@ -44,7 +47,7 @@ public class EhCacheImplTest {
     DI.clearReflectionModel();
     DI.activatePackages("org.rapidpm");
     DI.activateDI(this);
-    cacheByteArray = new CacheByteArray(new String("123").getBytes());
+    cacheByteArray = new CacheByteArray("123".getBytes());
   }
 
   @After
@@ -61,50 +64,50 @@ public class EhCacheImplTest {
 
   @Test
   public void test002() throws Exception {
-    final Result result = cacheClient.cacheBinary(TEST_CACHE, new SimpleCacheKey(), cacheByteArray);
-    assertEquals(Result.OK, result);
+    final Result result = cacheClient.cacheBinary(TEST_CACHE , new SimpleCacheKey() , cacheByteArray);
+    assertEquals(Result.OK , result);
   }
 
   @Test
   public void test003() throws Exception {
     final SimpleCacheKey cacheKey = new SimpleCacheKey();
-    final Result result01 = cacheClient.cacheBinary(TEST_CACHE, cacheKey, cacheByteArray);
-    assertEquals(Result.OK, result01);
+    final Result result01 = cacheClient.cacheBinary(TEST_CACHE , cacheKey , cacheByteArray);
+    assertEquals(Result.OK , result01);
 
-    final Result result02 = cacheClient.cacheBinaryIfAbsent(TEST_CACHE, cacheKey, cacheByteArray);
-    assertEquals(Result.OK, result02);
+    final Result result02 = cacheClient.cacheBinaryIfAbsent(TEST_CACHE , cacheKey , cacheByteArray);
+    assertEquals(Result.OK , result02);
   }
 
   @Test
   public void test004_a() throws Exception {
     final SimpleCacheKey cacheKey = new SimpleCacheKey();
-    final Result resultPut = cacheClient.cacheBinary(TEST_CACHE, cacheKey, cacheByteArray);
-    assertEquals(Result.OK, resultPut);
+    final Result resultPut = cacheClient.cacheBinary(TEST_CACHE , cacheKey , cacheByteArray);
+    assertEquals(Result.OK , resultPut);
 
-    final Optional<CacheByteArray> cachedElement = cacheClient.getCachedElement(TEST_CACHE, cacheKey);
+    final Optional<CacheByteArray> cachedElement = cacheClient.getCachedElement(TEST_CACHE , cacheKey);
     assertTrue(cachedElement.isPresent());
 
-    final Optional<CacheByteArray> notCachedElement = cacheClient.getCachedElement(TEST_CACHE, new SimpleCacheKey());
+    final Optional<CacheByteArray> notCachedElement = cacheClient.getCachedElement(TEST_CACHE , new SimpleCacheKey());
     assertFalse(notCachedElement.isPresent());
   }
 
   @Test
   public void test004_b() throws Exception {
     final SimpleCacheKey cacheKey = new SimpleCacheKey();
-    final Result resultPut = cacheClient.cacheBinary(TEST_CACHE, cacheKey, cacheByteArray);
-    assertEquals(Result.OK, resultPut);
+    final Result resultPut = cacheClient.cacheBinary(TEST_CACHE , cacheKey , cacheByteArray);
+    assertEquals(Result.OK , resultPut);
 
-    final Result resultRemove = cacheClient.removeEntry(TEST_CACHE, cacheKey);
-    assertEquals(Result.OK, resultRemove);
+    final Result resultRemove = cacheClient.removeEntry(TEST_CACHE , cacheKey);
+    assertEquals(Result.OK , resultRemove);
 
-    final Optional<CacheByteArray> cachedElement = cacheClient.getCachedElement(TEST_CACHE, cacheKey);
+    final Optional<CacheByteArray> cachedElement = cacheClient.getCachedElement(TEST_CACHE , cacheKey);
     assertFalse(cachedElement.isPresent());
   }
 
   @Test
   public void test005() throws Exception {
-    final Result resultRemove = cacheClient.removeEntry(TEST_CACHE, new SimpleCacheKey());
-    assertEquals(Result.FAILED, resultRemove);
+    final Result resultRemove = cacheClient.removeEntry(TEST_CACHE , new SimpleCacheKey());
+    assertEquals(Result.FAILED , resultRemove);
   }
 
   public static class SimpleCacheKey implements CacheKey {

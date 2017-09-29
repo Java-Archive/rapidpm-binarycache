@@ -34,8 +34,7 @@ import static org.junit.Assert.*;
 public class HazelcastCacheImplTest001 {
 
   public static final String CACHE_NAME = "default";
-  @Inject
-  BinaryCacheClient cacheClient;
+  @Inject private BinaryCacheClient cacheClient;
 
   @Before
   public void setUp() throws Exception {

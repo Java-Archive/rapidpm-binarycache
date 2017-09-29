@@ -33,10 +33,8 @@ public class BinaryCacheRestClient {
 
   private static final Logger LOGGER = LoggerFactory.getLogger(BinaryCacheRestClient.class);
 
-  @Inject
-  private BinaryCacheClient binaryCacheClient;
-  @Inject
-  private CacheKeyAdapter adapter;
+  @Inject private BinaryCacheClient binaryCacheClient;
+  @Inject private CacheKeyAdapter adapter;
   private static final int BUFFER_SIZE = 1024;
 
   @PUT
