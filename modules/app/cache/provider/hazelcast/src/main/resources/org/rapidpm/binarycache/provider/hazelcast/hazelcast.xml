@@ -13,6 +13,7 @@
   <cache name="default">
     <key-type class-name="org.rapidpm.binarycache.api.CacheKey"/>
     <value-type class-name="org.rapidpm.binarycache.api.CacheByteArray"/>
+    <!-- LRU=Least Recently Used; LFU=Least Frequently Used-->
     <eviction max-size-policy="ENTRY_COUNT" size="10000" eviction-policy="LRU"/>
   </cache>
 

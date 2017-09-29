@@ -13,6 +13,7 @@ import javax.inject.Inject;
 
 import java.util.Optional;
 
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
@@ -52,7 +53,7 @@ public class BinaryCacheInmemoryClientTest {
   }
 
   @Test
-  public void test003() throws Exception {
+  public void test002() throws Exception {
     final DefaultCacheKey key = new DefaultCacheKey("123");
     final byte[] value = "test".getBytes();
 
@@ -60,5 +61,20 @@ public class BinaryCacheInmemoryClientTest {
     final Optional<CacheByteArray> cachedElement = client.getCachedElement(DEFAULT_CACHE, key);
 
     assertTrue(cachedElement.isPresent());
+  }
+
+  @Test
+  public void test003() throws Exception {
+    final String myCache = "myImageCache";
+    client.createCache(myCache);
+    final Cache<CacheKey, CacheByteArray> cache = client.getCache(myCache);
+    assertNotNull(cache);
+
+    final DefaultCacheKey key = new DefaultCacheKey("123");
+    final CacheByteArray value = new CacheByteArray("myCacheTest".getBytes());
+
+    assertFalse(cache.containsKey(key));
+    client.cacheBinary(myCache, key, value);
+    assertTrue(cache.containsKey(key));
   }
 }

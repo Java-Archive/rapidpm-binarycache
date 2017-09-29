@@ -2,7 +2,6 @@ package junit.org.rapidpm.binarycache.client.connect.rest;
 
 import org.junit.After;
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 import org.rapidpm.binarycache.api.CacheByteArray;
 import org.rapidpm.binarycache.api.CacheKey;
@@ -15,7 +14,6 @@ import org.rapidpm.microservice.Main;
 import org.rapidpm.microservice.MainUndertow;
 
 import javax.cache.Cache;
-import java.io.File;
 import java.util.Optional;
 
 import static org.junit.Assert.*;
@@ -38,28 +36,24 @@ public class BinaryCacheRestClientTest001 {
 
   public static final String CACHE_NAME = "default";
   private BinaryCacheRestClient client;
-  private File value;
-
-  @BeforeClass
-  public static void setUpClass() {
-    System.setProperty(MainUndertow.REST_PORT_PROPERTY, new PortUtils().nextFreePortForTest() + "");
-    System.setProperty(MainUndertow.SERVLET_PORT_PROPERTY, new PortUtils().nextFreePortForTest() + "");
-  }
 
   @Before
   public void setUp() throws Exception {
     DI.activatePackages("org.rapidpm");
     DI.activatePackages(this.getClass());
     DI.activateDI(this);
+    final int portForTest = new PortUtils().nextFreePortForTest();
+    System.setProperty(MainUndertow.REST_PORT_PROPERTY, String.valueOf(portForTest));
+    System.setProperty(BinaryCacheRestClient.PROPERTY_PORT, String.valueOf(portForTest));
+    client = DI.activateDI(BinaryCacheRestClient.class);
     Main.deploy();
-    client = new BinaryCacheRestClient(Integer.valueOf(System.getProperty(MainUndertow.REST_PORT_PROPERTY)));
-    DI.activateDI(client);
-    value = new File(this.getClass().getResource("testpic.png").toURI());
   }
 
   @After
   public void tearDown() throws Exception {
     Main.stop();
+    System.clearProperty(BinaryCacheRestClient.PROPERTY_PORT);
+    DI.clearReflectionModel();
   }
 
   @Test(expected = java.lang.RuntimeException.class)

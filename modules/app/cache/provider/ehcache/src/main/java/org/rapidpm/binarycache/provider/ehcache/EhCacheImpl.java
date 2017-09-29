@@ -9,7 +9,13 @@ import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 import javax.cache.Cache;
 import javax.cache.Caching;
+import javax.cache.configuration.Configuration;
+import javax.cache.configuration.MutableConfiguration;
+import javax.cache.expiry.AccessedExpiryPolicy;
+import javax.cache.expiry.Duration;
 import javax.cache.spi.CachingProvider;
+import java.io.File;
+import java.net.URI;
 import java.net.URISyntaxException;
 
 /**
@@ -28,21 +34,49 @@ import java.net.URISyntaxException;
  */
 public class EhCacheImpl implements BinaryCacheClient {
 
-  public static final String CONFIG_EHCACHE_XML = "/config/ehcache.xml";
+  public static final String CACHE_CONFIG_PROPERTY = "binarycache.config";
+  private static final String CONFIG_EHCACHE_XML = "/config/ehcache.xml";
   private javax.cache.CacheManager cacheManager;
 
   @PostConstruct
   public void init() throws URISyntaxException {
     final CachingProvider cachingProvider = Caching.getCachingProvider();
     cacheManager = cachingProvider.getCacheManager(
-        getClass().getResource(CONFIG_EHCACHE_XML).toURI(),
+        getUriToConfig(),
         getClass().getClassLoader()
     );
+  }
+
+  private URI getUriToConfig() throws URISyntaxException {
+    final String property = System.getProperty(CACHE_CONFIG_PROPERTY);
+    URI uri;
+    if (property != null && !property.isEmpty()) {
+      uri = new File(property).toURI();
+    } else {
+      uri = getClass().getResource(CONFIG_EHCACHE_XML).toURI();
+    }
+    return uri;
   }
 
   @PreDestroy
   public void destroy() {
     cacheManager.close();
+  }
+
+  @Override
+  public Cache<CacheKey, CacheByteArray> createCache(String cacheName) {
+    MutableConfiguration<CacheKey, CacheByteArray> config
+        = new MutableConfiguration<CacheKey, CacheByteArray>()
+        .setTypes(CacheKey.class, CacheByteArray.class)
+        .setExpiryPolicyFactory(
+            AccessedExpiryPolicy.factoryOf(Duration.ONE_HOUR))
+        .setStatisticsEnabled(true);
+    return cacheManager.createCache(cacheName, config);
+  }
+
+  @Override
+  public Cache<CacheKey, CacheByteArray> createCache(String cacheName, Configuration<CacheKey, CacheByteArray> configuration) {
+    return cacheManager.createCache(cacheName, configuration);
   }
 
   @Override
@@ -54,7 +88,5 @@ public class EhCacheImpl implements BinaryCacheClient {
   public Result removeEntry(String cacheName, CacheKey cacheKey) {
     return cacheManager.getCache(cacheName, CacheKey.class, CacheByteArray.class).remove(cacheKey) ? Result.OK : Result.FAILED;
   }
-
-
 
 }
