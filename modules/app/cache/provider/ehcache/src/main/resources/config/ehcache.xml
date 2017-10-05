@@ -1,19 +1,28 @@
-<ehcache:config
-    xmlns:ehcache="http://www.ehcache.org/v3">
+<config
+    xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+    xmlns='http://www.ehcache.org/v3'
+    xmlns:jsr107='http://www.ehcache.org/v3/jsr107'
+    xsi:schemaLocation="
+    http://www.ehcache.org/v3 http://www.ehcache.org/schema/ehcache-core-3.0.xsd
+    http://www.ehcache.org/v3/jsr107 http://www.ehcache.org/schema/ehcache-107-ext-3.0.xsd">
 
-  <ehcache:cache alias="default" uses-template="defaultTemplate"/>
-  <ehcache:cache alias="myCache" uses-template="defaultTemplate"/>
+  <service>
+    <jsr107:defaults enable-management="true" enable-statistics="true"/>
+  </service>
 
-  <ehcache:cache-template name="defaultTemplate">
-    <ehcache:key-type>org.rapidpm.binarycache.api.CacheKey</ehcache:key-type>
-    <ehcache:value-type>org.rapidpm.binarycache.api.CacheByteArray</ehcache:value-type>
-    <ehcache:expiry>
+  <cache alias="default" uses-template="defaultTemplate"/>
+  <cache alias="myCache" uses-template="defaultTemplate"/>
+
+  <cache-template name="defaultTemplate">
+    <key-type>org.rapidpm.binarycache.api.CacheKey</key-type>
+    <value-type>org.rapidpm.binarycache.api.CacheByteArray</value-type>
+    <expiry>
       <!-- tti=time to idle; ttl=time to live; -->
-      <ehcache:tti unit="hours">1</ehcache:tti>
-    </ehcache:expiry>
+      <tti unit="hours">1</tti>
+    </expiry>
 
-    <ehcache:heap unit="entries">200</ehcache:heap>
-  </ehcache:cache-template>
+    <heap unit="entries">200</heap>
+    <jsr107:mbeans enable-management="true" enable-statistics="true"/>
+  </cache-template>
 
-
-</ehcache:config>
+</config>

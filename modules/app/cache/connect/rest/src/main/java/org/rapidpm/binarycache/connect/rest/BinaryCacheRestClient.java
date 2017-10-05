@@ -10,7 +10,10 @@ import javax.inject.Inject;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-import java.io.*;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.Base64;
 import java.util.Optional;
 
@@ -33,8 +36,10 @@ public class BinaryCacheRestClient {
 
   private static final Logger LOGGER = LoggerFactory.getLogger(BinaryCacheRestClient.class);
 
-  @Inject private BinaryCacheClient binaryCacheClient;
-  @Inject private CacheKeyAdapter adapter;
+  @Inject
+  private BinaryCacheClient binaryCacheClient;
+  @Inject
+  private CacheKeyAdapter adapter;
   private static final int BUFFER_SIZE = 1024;
 
   @PUT
@@ -99,10 +104,11 @@ public class BinaryCacheRestClient {
   public Response removeEntry(@PathParam("cacheName") final String cacheName,
                               @PathParam("key") final String cacheKey) {
     final Result result = binaryCacheClient.removeEntry(cacheName, decodeCacheKey(cacheKey));
-    if (result.equals(Result.OK))
+    if (result.equals(Result.OK)) {
       return Response.ok().build();
-    else
+    } else {
       return Response.notModified().build();
+    }
   }
 
   private CacheKey decodeCacheKey(String key) {

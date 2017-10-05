@@ -8,6 +8,7 @@ import org.rapidpm.binarycache.api.Result;
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 import javax.cache.Cache;
+import javax.cache.CacheManager;
 import javax.cache.Caching;
 import javax.cache.configuration.Configuration;
 import javax.cache.configuration.MutableConfiguration;
@@ -36,12 +37,12 @@ public class EhCacheImpl implements BinaryCacheClient {
 
   public static final String CACHE_CONFIG_PROPERTY = "binarycache.config";
   private static final String CONFIG_EHCACHE_XML = "/config/ehcache.xml";
-  private javax.cache.CacheManager cacheManager;
+  private CacheManager manager;
 
   @PostConstruct
   public void init() throws URISyntaxException {
     final CachingProvider cachingProvider = Caching.getCachingProvider();
-    cacheManager = cachingProvider.getCacheManager(
+    manager = cachingProvider.getCacheManager(
         getUriToConfig(),
         getClass().getClassLoader()
     );
@@ -60,7 +61,7 @@ public class EhCacheImpl implements BinaryCacheClient {
 
   @PreDestroy
   public void destroy() {
-    cacheManager.close();
+    manager.close();
   }
 
   @Override
@@ -69,24 +70,23 @@ public class EhCacheImpl implements BinaryCacheClient {
         = new MutableConfiguration<CacheKey, CacheByteArray>()
         .setTypes(CacheKey.class, CacheByteArray.class)
         .setExpiryPolicyFactory(
-            AccessedExpiryPolicy.factoryOf(Duration.ONE_HOUR))
-        .setStatisticsEnabled(true);
-    return cacheManager.createCache(cacheName, config);
+            AccessedExpiryPolicy.factoryOf(Duration.ONE_HOUR));
+    return manager.createCache(cacheName, config);
   }
 
   @Override
   public Cache<CacheKey, CacheByteArray> createCache(String cacheName, Configuration<CacheKey, CacheByteArray> configuration) {
-    return cacheManager.createCache(cacheName, configuration);
+    return manager.createCache(cacheName, configuration);
   }
 
   @Override
   public Cache<CacheKey, CacheByteArray> getCache(String cacheName) {
-    return cacheManager.getCache(cacheName, CacheKey.class, CacheByteArray.class);
+    return manager.getCache(cacheName, CacheKey.class, CacheByteArray.class);
   }
 
   @Override
   public Result removeEntry(String cacheName, CacheKey cacheKey) {
-    return cacheManager.getCache(cacheName, CacheKey.class, CacheByteArray.class).remove(cacheKey) ? Result.OK : Result.FAILED;
+    return manager.getCache(cacheName, CacheKey.class, CacheByteArray.class).remove(cacheKey) ? Result.OK : Result.FAILED;
   }
 
 }
