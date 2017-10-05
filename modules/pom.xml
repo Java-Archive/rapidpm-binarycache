@@ -24,7 +24,7 @@
   <parent>
     <groupId>org.rapidpm.binarycache</groupId>
     <artifactId>rapidpm-binarycache</artifactId>
-    <version>1.0.0-SNAPSHOT</version>
+    <version>0.9.2-SNAPSHOT</version>
   </parent>
 
   <modelVersion>4.0.0</modelVersion>
@@ -42,7 +42,7 @@
       <dependency>
         <groupId>org.rapidpm.binarycache</groupId>
         <artifactId>rapidpm-binarycache-bom</artifactId>
-        <version>1.0.0-SNAPSHOT</version>
+        <version>${project.version}</version>
         <type>pom</type>
         <scope>import</scope>
       </dependency>

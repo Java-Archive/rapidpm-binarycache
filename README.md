@@ -60,3 +60,12 @@ The implementation of the JSR 107 (JCache) from Hazelcast offers a distribution 
 - Infinispan
 - Apache Ignite
 - JCS
+
+# Release Notes
+
+## 0.9.1
+- Initial Cache Implementation with the providers Ehcache and Hazelcast
+- Rest Endpoints for client and backend
+- Aggregate module to build different kinds of binarycaches (standalone or inmemory /  Ehcache or Hazelcast)
+- Added Performance Tests
+- BOM module to manage dependencies
