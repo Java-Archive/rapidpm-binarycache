@@ -15,9 +15,9 @@
 
   <properties>
     <rapidpm.version>0.9.1</rapidpm.version>
-    <rapidpm.jumpstart.version>0.7.0-SNAPSHOT</rapidpm.jumpstart.version>
-    <vaadin.version>8.0.5</vaadin.version>
-    <vaadin-testbench-api.version>5.0.0</vaadin-testbench-api.version>
+    <!--<rapidpm.jumpstart.version>0.7.0-SNAPSHOT</rapidpm.jumpstart.version>-->
+    <!--<vaadin.version>8.0.5</vaadin.version>-->
+    <!--<vaadin-testbench-api.version>5.0.0</vaadin-testbench-api.version>-->
   </properties>
 
 
@@ -31,21 +31,21 @@
         <version>1.0.0</version>
       </dependency>
 
-      <dependency>
-        <groupId>org.rapidpm.binarycache</groupId>
-        <artifactId>rapidpm-binarycache-modules-app-gui-logic</artifactId>
-        <version>${project.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>org.rapidpm.binarycache</groupId>
-        <artifactId>rapidpm-binarycache-modules-app-gui-design</artifactId>
-        <version>${project.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>org.rapidpm.binarycache</groupId>
-        <artifactId>rapidpm-binarycache-modules-app-gui-ui</artifactId>
-        <version>${project.version}</version>
-      </dependency>
+      <!--<dependency>-->
+        <!--<groupId>org.rapidpm.binarycache</groupId>-->
+        <!--<artifactId>rapidpm-binarycache-modules-app-gui-logic</artifactId>-->
+        <!--<version>${project.version}</version>-->
+      <!--</dependency>-->
+      <!--<dependency>-->
+        <!--<groupId>org.rapidpm.binarycache</groupId>-->
+        <!--<artifactId>rapidpm-binarycache-modules-app-gui-design</artifactId>-->
+        <!--<version>${project.version}</version>-->
+      <!--</dependency>-->
+      <!--<dependency>-->
+        <!--<groupId>org.rapidpm.binarycache</groupId>-->
+        <!--<artifactId>rapidpm-binarycache-modules-app-gui-ui</artifactId>-->
+        <!--<version>${project.version}</version>-->
+      <!--</dependency>-->
       <dependency>
         <groupId>org.rapidpm.binarycache</groupId>
         <artifactId>rapidpm-binarycache-modules-optionals-microservice</artifactId>
@@ -100,16 +100,16 @@
         <artifactId>jumpstart-vaadin-modules-optionals-microservice</artifactId>
         <version>${rapidpm.jumpstart.version}</version>
       </dependency>
-      <dependency>
-        <groupId>org.rapidpm.proxybuilder</groupId>
-        <artifactId>rapidpm-proxybuilder-modules-objectadapter-generator-processors</artifactId>
-        <version>${rapidpm.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>org.rapidpm.proxybuilder</groupId>
-        <artifactId>rapidpm-proxybuilder-modules-objectadapter-generator-annotations</artifactId>
-        <version>${rapidpm.version}</version>
-      </dependency>
+      <!--<dependency>-->
+        <!--<groupId>org.rapidpm.proxybuilder</groupId>-->
+        <!--<artifactId>rapidpm-proxybuilder-modules-objectadapter-generator-processors</artifactId>-->
+        <!--<version>${rapidpm.version}</version>-->
+      <!--</dependency>-->
+      <!--<dependency>-->
+        <!--<groupId>org.rapidpm.proxybuilder</groupId>-->
+        <!--<artifactId>rapidpm-proxybuilder-modules-objectadapter-generator-annotations</artifactId>-->
+        <!--<version>${rapidpm.version}</version>-->
+      <!--</dependency>-->
       <dependency>
         <groupId>org.rapidpm.microservice</groupId>
         <artifactId>rapidpm-microservice-modules-core</artifactId>
@@ -139,38 +139,38 @@
       </dependency>
 
       <!--Vaadin Based stuff-->
-      <dependency>
-        <groupId>com.vaadin</groupId>
-        <artifactId>vaadin-server</artifactId>
-        <version>${vaadin.version}</version>
-      </dependency>
+      <!--<dependency>-->
+        <!--<groupId>com.vaadin</groupId>-->
+        <!--<artifactId>vaadin-server</artifactId>-->
+        <!--<version>${vaadin.version}</version>-->
+      <!--</dependency>-->
 
-      <dependency>
-        <groupId>com.vaadin</groupId>
-        <artifactId>vaadin-themes</artifactId>
-        <version>${vaadin.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>com.vaadin</groupId>
-        <artifactId>vaadin-push</artifactId>
-        <version>${vaadin.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>com.vaadin</groupId>
-        <artifactId>vaadin-client</artifactId>
-        <version>${vaadin.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>com.vaadin</groupId>
-        <artifactId>vaadin-client-compiled</artifactId>
-        <version>${vaadin.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>com.vaadin</groupId>
-        <artifactId>vaadin-testbench</artifactId>
-        <version>${vaadin-testbench-api.version}</version>
-        <scope>test</scope>
-      </dependency>
+      <!--<dependency>-->
+        <!--<groupId>com.vaadin</groupId>-->
+        <!--<artifactId>vaadin-themes</artifactId>-->
+        <!--<version>${vaadin.version}</version>-->
+      <!--</dependency>-->
+      <!--<dependency>-->
+        <!--<groupId>com.vaadin</groupId>-->
+        <!--<artifactId>vaadin-push</artifactId>-->
+        <!--<version>${vaadin.version}</version>-->
+      <!--</dependency>-->
+      <!--<dependency>-->
+        <!--<groupId>com.vaadin</groupId>-->
+        <!--<artifactId>vaadin-client</artifactId>-->
+        <!--<version>${vaadin.version}</version>-->
+      <!--</dependency>-->
+      <!--<dependency>-->
+        <!--<groupId>com.vaadin</groupId>-->
+        <!--<artifactId>vaadin-client-compiled</artifactId>-->
+        <!--<version>${vaadin.version}</version>-->
+      <!--</dependency>-->
+      <!--<dependency>-->
+        <!--<groupId>com.vaadin</groupId>-->
+        <!--<artifactId>vaadin-testbench</artifactId>-->
+        <!--<version>${vaadin-testbench-api.version}</version>-->
+        <!--<scope>test</scope>-->
+      <!--</dependency>-->
 
       <dependency>
         <groupId>org.jboss.resteasy</groupId>

@@ -32,6 +32,10 @@
   <packaging>pom</packaging>
   <version>0.9.1</version>
 
+  <properties>
+    <rapidpm-binarycache.version>0.9.1</rapidpm-binarycache.version>
+  </properties>
+
   <modules>
     <module>bom</module>
     <module>modules</module>
@@ -88,9 +92,7 @@
     </license>
   </licenses>
 
-  <properties>
-    <rapidpm-binarycache.version>1.0.0</rapidpm-binarycache.version>
-  </properties>
+
 
 
   <build>

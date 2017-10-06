@@ -31,10 +31,7 @@
       <artifactId>rapidpm-microservice-modules-core</artifactId>
       <scope>test</scope>
     </dependency>
-    <dependency>
-      <groupId>org.rapidpm.dynamic-cdi</groupId>
-      <artifactId>rapidpm-dynamic-cdi-modules-core</artifactId>
-    </dependency>
+
   </dependencies>
 
 </project>
