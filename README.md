@@ -3,7 +3,7 @@
 ## Overview
  - RapidPM Microservice
  - Different JCache implementations, e.g. EHCache or Hazelcast Cache
- - Inmemory interface for direct access to the cache functionality 
+ - InMemory interface for direct access to the cache functionality 
  - REST endpoints for access via http
  
 ## JCache?
