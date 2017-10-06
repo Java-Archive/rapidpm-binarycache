@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <parent>
+    <groupId>org.rapidpm.binarycache</groupId>
+    <artifactId>rapidpm-binarycache</artifactId>
+    <version>1.0.0-SNAPSHOT</version>
+  </parent>
+
+  <artifactId>rapidpm-binarycache-prebuilds</artifactId>
+  <packaging>pom</packaging>
+
+  <modules>
+    <module>inmemory-ehcache</module>
+    <module>inmemory-hazelcast</module>
+    <module>rest-ehcache</module>
+    <module>rest-hazelcast</module>
+  </modules>
+
+  <dependencies>
+    <dependency>
+      <groupId>org.rapidpm.microservice</groupId>
+      <artifactId>rapidpm-microservice-modules-core</artifactId>
+      <version>1.0.0-SNAPSHOT</version>
+    </dependency>
+  </dependencies>
+
+
+</project>

@@ -40,6 +40,7 @@
     <module>bom</module>
     <module>modules</module>
     <module>aggregate</module>
+    <module>prebuilds</module>
   </modules>
 
   <inceptionYear>2017</inceptionYear>
