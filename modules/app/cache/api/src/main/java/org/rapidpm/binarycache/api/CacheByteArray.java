@@ -18,9 +18,14 @@ import java.io.Serializable;
  */
 public class CacheByteArray implements Serializable {
 
-  public byte[] byteArray;
+  private byte[] byteArray;
 
   public CacheByteArray(byte[] byteArray) {
     this.byteArray = byteArray;
   }
+
+  public byte[] getByteArray() {
+    return byteArray;
+  }
+
 }

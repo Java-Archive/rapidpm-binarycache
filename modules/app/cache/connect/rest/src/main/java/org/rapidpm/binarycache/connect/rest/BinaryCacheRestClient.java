@@ -88,7 +88,7 @@ public class BinaryCacheRestClient {
     final CacheKey decodedKey = decodeCacheKey(key);
     final Optional<CacheByteArray> cachedElement = binaryCacheClient.getCachedElement(cacheName, decodedKey);
     return cachedElement
-        .map(cacheByteArray -> Response.ok(new ByteArrayInputStream(cacheByteArray.byteArray), MediaType.APPLICATION_OCTET_STREAM).build())
+        .map(cacheByteArray -> Response.ok(new ByteArrayInputStream(cacheByteArray.getByteArray()), MediaType.APPLICATION_OCTET_STREAM).build())
         .orElseGet(() -> Response.status(Response.Status.NOT_FOUND).build());
   }
 

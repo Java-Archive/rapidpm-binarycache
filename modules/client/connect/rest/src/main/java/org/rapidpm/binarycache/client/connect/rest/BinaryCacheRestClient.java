@@ -63,7 +63,7 @@ public class BinaryCacheRestClient implements BinaryCacheClient {
 
     final Response response = client.target(targetUrl + "/" + encodedKey)
         .request()
-        .put(Entity.entity(binary.byteArray, MediaType.APPLICATION_OCTET_STREAM));
+        .put(Entity.entity(binary.getByteArray(), MediaType.APPLICATION_OCTET_STREAM));
 
     client.close();
     return response.getStatus() == Response.Status.OK.getStatusCode() ? Result.OK : Result.FAILED;
@@ -77,7 +77,7 @@ public class BinaryCacheRestClient implements BinaryCacheClient {
 
     final Response response = client.target(targetUrl + "/" + encodedKey)
         .request()
-        .put(Entity.entity(binary.byteArray, MediaType.APPLICATION_OCTET_STREAM));
+        .put(Entity.entity(binary.getByteArray(), MediaType.APPLICATION_OCTET_STREAM));
 
     client.close();
     return response.getStatus() == Response.Status.OK.getStatusCode() ? Result.OK : Result.FAILED;

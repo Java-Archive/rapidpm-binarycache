@@ -18,7 +18,7 @@ public class CacheKeyAdapter implements JsonSerializer, JsonDeserializer {
   }
 
   @Override
-  public Object deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) throws JsonParseException {
+  public Object deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) {
     final JsonObject jsonObject = json.getAsJsonObject();
     final JsonPrimitive primitive = (JsonPrimitive) jsonObject.get(CLASS);
     final Class aClass = getObjectClass(primitive.getAsString());

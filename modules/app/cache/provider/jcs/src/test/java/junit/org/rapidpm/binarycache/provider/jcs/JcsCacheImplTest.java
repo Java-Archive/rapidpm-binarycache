@@ -68,7 +68,7 @@ public class JcsCacheImplTest {
 
     final CacheByteArray byteResult = cachedElement.get();
     assertTrue(value.equals(byteResult));
-    assertEquals(TEST_STRING, new String(byteResult.byteArray));
+    assertEquals(TEST_STRING, new String(byteResult.getByteArray()));
   }
 
 

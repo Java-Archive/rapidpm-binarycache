@@ -62,6 +62,6 @@ public class HazelcastCacheImplTest002 {
     final Optional<CacheByteArray> cachedElement = client02.getCachedElement(CACHE_NAME, key);
 
     assertTrue(cachedElement.isPresent());
-    assertEquals(new String(value.byteArray), new String(cachedElement.get().byteArray));
+    assertEquals(new String(value.getByteArray()), new String(cachedElement.get().getByteArray()));
   }
 }

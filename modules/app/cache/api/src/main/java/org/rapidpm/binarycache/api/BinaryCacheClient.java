@@ -54,7 +54,7 @@ public interface BinaryCacheClient {
   default Result cacheBinaryIfAbsent(String cacheName, CacheKey cacheKey, CacheByteArray binary) {
     final Cache<CacheKey, CacheByteArray> cache = getCache(cacheName);
     final boolean ifAbsent = cache.putIfAbsent(cacheKey, binary);
-    return Result.OK;
+    return ifAbsent ? Result.OK : Result.FAILED;
   }
 
   default Optional<CacheByteArray> getCachedElement(String cacheName, CacheKey cacheKey) {
@@ -68,7 +68,7 @@ public interface BinaryCacheClient {
 
   default Result removeEntry(String cacheName, CacheKey cacheKey) {
     final boolean remove = getCache(cacheName).remove(cacheKey);
-    return Result.OK;
+    return remove ? Result.OK : Result.FAILED;
   }
 
 

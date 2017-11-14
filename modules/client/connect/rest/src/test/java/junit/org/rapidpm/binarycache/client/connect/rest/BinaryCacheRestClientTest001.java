@@ -76,7 +76,7 @@ public class BinaryCacheRestClientTest001 {
 
     final Optional<CacheByteArray> cachedElement = client.getCachedElement(CACHE_NAME, key);
     assertTrue(cachedElement.isPresent());
-    assertEquals(new String(value.byteArray), new String(cachedElement.get().byteArray));
+    assertEquals(new String(value.getByteArray()), new String(cachedElement.get().getByteArray()));
   }
 
   @Test
@@ -88,7 +88,7 @@ public class BinaryCacheRestClientTest001 {
 
     final Optional<CacheByteArray> cachedElement = client.getCachedElement(CACHE_NAME, key);
     assertTrue(cachedElement.isPresent());
-    assertEquals(new String(value.byteArray), new String(cachedElement.get().byteArray));
+    assertEquals(new String(value.getByteArray()), new String(cachedElement.get().getByteArray()));
   }
 
   @Test
@@ -113,7 +113,7 @@ public class BinaryCacheRestClientTest001 {
 
     final Optional<CacheByteArray> element01 = client.getCachedElement(CACHE_NAME, key);
     assertTrue(element01.isPresent());
-    assertEquals(new String(value.byteArray), new String(element01.get().byteArray));
+    assertEquals(new String(value.getByteArray()), new String(element01.get().getByteArray()));
 
     final Result result = client.removeEntry(CACHE_NAME, key);
     assertEquals(Result.OK, result);
