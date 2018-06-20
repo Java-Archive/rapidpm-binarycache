@@ -14,7 +14,7 @@
   <packaging>pom</packaging>
 
   <properties>
-    <rapidpm.version>1.0.0-SNAPSHOT</rapidpm.version>
+    <rapidpm.version>1.0.3</rapidpm.version>
     <!--<rapidpm.jumpstart.version>0.7.0-SNAPSHOT</rapidpm.jumpstart.version>-->
     <!--<vaadin.version>8.0.5</vaadin.version>-->
     <!--<vaadin-testbench-api.version>5.0.0</vaadin-testbench-api.version>-->
@@ -30,22 +30,6 @@
         <artifactId>cache-api</artifactId>
         <version>1.0.0</version>
       </dependency>
-
-      <!--<dependency>-->
-        <!--<groupId>org.rapidpm.binarycache</groupId>-->
-        <!--<artifactId>rapidpm-binarycache-modules-app-gui-logic</artifactId>-->
-        <!--<version>${project.version}</version>-->
-      <!--</dependency>-->
-      <!--<dependency>-->
-        <!--<groupId>org.rapidpm.binarycache</groupId>-->
-        <!--<artifactId>rapidpm-binarycache-modules-app-gui-design</artifactId>-->
-        <!--<version>${project.version}</version>-->
-      <!--</dependency>-->
-      <!--<dependency>-->
-        <!--<groupId>org.rapidpm.binarycache</groupId>-->
-        <!--<artifactId>rapidpm-binarycache-modules-app-gui-ui</artifactId>-->
-        <!--<version>${project.version}</version>-->
-      <!--</dependency>-->
       <dependency>
         <groupId>org.rapidpm.binarycache</groupId>
         <artifactId>rapidpm-binarycache-modules-optionals-microservice</artifactId>
@@ -178,6 +162,23 @@
         <version>3.1.1.Final</version>
       </dependency>
 
+
+      <dependency>
+        <groupId>org.slf4j</groupId>
+        <artifactId>slf4j-api</artifactId>
+        <version>1.7.25</version>
+      </dependency>
+      <dependency>
+        <groupId>org.slf4j</groupId>
+        <artifactId>slf4j-simple</artifactId>
+        <version>1.7.25</version>
+      </dependency>
+
+      <dependency>
+        <groupId>junit</groupId>
+        <artifactId>junit</artifactId>
+        <version>4.12</version>
+      </dependency>
     </dependencies>
   </dependencyManagement>
 
